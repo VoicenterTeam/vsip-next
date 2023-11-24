@@ -1,0 +1,36 @@
+:root {
+  --content-width: 1464px;
+  --c-brand: #2675FF;
+}
+.theme-container .theme-default-content {
+  //margin: 0;
+  h1 {
+    font-size: 1.75rem;
+  }
+  .example-block code {
+    background-color: #dde4ef;
+    display: block;
+    white-space: pre;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+    max-width: 100%;
+    min-width: 100px;
+    padding: 0;
+    max-height: 700px;
+  }
+}
+html.dark {
+  --c-brand: #2675FF;
+  .theme-container .theme-default-content {
+    //margin: 0;
+    h1, h2, h3, h4 {
+      color: #adbac7
+    }
+    .vc-form-builder--component-configuration .vc-collapse-item__header, .vc-form-builder--component-configuration .vc-input__label-wrapper-label {
+      color: #adbac7 !important;
+    }
+    code {
+      color: black;
+    }
+  }
+}

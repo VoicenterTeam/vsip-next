@@ -1,0 +1,47 @@
+{
+  "hash": "25aa21b4",
+  "browserHash": "da9995af",
+  "optimized": {
+    "@vue/devtools-api": {
+      "src": "../../../../node_modules/@vue/devtools-api/lib/esm/index.js",
+      "file": "@vue_devtools-api.js",
+      "fileHash": "31619582",
+      "needsInterop": false
+    },
+    "@vuepress/shared": {
+      "src": "../../../../node_modules/@vuepress/shared/dist/index.js",
+      "file": "@vuepress_shared.js",
+      "fileHash": "f3834799",
+      "needsInterop": false
+    },
+    "vue": {
+      "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "2f469992",
+      "needsInterop": false
+    },
+    "vue-router": {
+      "src": "../../../../node_modules/vue-router/dist/vue-router.esm-bundler.js",
+      "file": "vue-router.js",
+      "fileHash": "a5e48fc8",
+      "needsInterop": false
+    },
+    "@voicenter-team/voicenter-ui-plus": {
+      "src": "../../../../node_modules/@voicenter-team/voicenter-ui-plus/library/super.mjs",
+      "file": "@voicenter-team_voicenter-ui-plus.js",
+      "fileHash": "a8922d5b",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-RFQTXRIF": {
+      "file": "chunk-RFQTXRIF.js"
+    },
+    "chunk-AQDTH7GJ": {
+      "file": "chunk-AQDTH7GJ.js"
+    },
+    "chunk-DDKVHXSX": {
+      "file": "chunk-DDKVHXSX.js"
+    }
+  }
+}
