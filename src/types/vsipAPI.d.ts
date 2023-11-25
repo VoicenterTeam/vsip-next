@@ -10,5 +10,12 @@ export interface VsipAPIState {
 }
 
 export interface VsipAPIActions {
+    init(domain: string, username: string, password: string): void
     setActiveCalls: (value: number) => number
+}
+
+export interface DoCallHoldParamsType {
+    callId: string
+    toHold: boolean
+    automatic?: boolean
 }
