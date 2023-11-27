@@ -16,7 +16,7 @@ import { VsipAPI, DoCallHoldParamsType } from '@/types'
 
 const activeCalls = ref<{ [key: string]: ICall }>({})
 const activeMessages = ref<{ [key: string]: IMessage }>({})
-const openSIPSJS = ref<OpenSIPSJS>(undefined)
+const openSIPSJS = ref<OpenSIPSJS | undefined>(undefined)
 const addCallToCurrentRoom = ref<boolean>(false)
 const callAddingInProgress = ref<boolean>(false)
 const activeRooms = ref<{ [key: number]: IRoom }>({})
@@ -27,23 +27,37 @@ const selectedInputDevice = ref<string>('default')
 const muteWhenJoin = ref<boolean>(false)
 const isDND = ref<boolean>(false)
 const isMuted = ref<boolean>(false)
-const originalStream = ref<MediaStream>(null)
-const currentActiveRoomId = ref<number>(undefined)
+const originalStream = ref<MediaStream | null>(null)
+const currentActiveRoomId = ref<number | undefined>(undefined)
 const autoAnswer = ref<boolean>(false)
 const microphoneInputLevel = ref<number>(2) // [0;2]
 const speakerVolume = ref<number>(2) // [0;1]
 const callStatus = ref<{ [key: string]: ICallStatus }>({})
 const callTime = ref<{ [key: string]: ITimeData }>({})
 const callMetrics = ref<{ [key: string]: unknown }>({})
-//microphoneInputLevel
-//speakerVolume
-//callStatus
-//callTime
-//callMetrics
 
 export const vsipAPI: VsipAPI = {
     state: {
-        activeCalls: activeCalls
+        activeCalls: activeCalls,
+        activeMessages: activeMessages,
+        addCallToCurrentRoom: addCallToCurrentRoom,
+        callAddingInProgress: callAddingInProgress,
+        activeRooms: activeRooms,
+        msrpHistory: msrpHistory,
+        availableMediaDevices: availableMediaDevices,
+        selectedOutputDevice: selectedOutputDevice,
+        selectedInputDevice: selectedInputDevice,
+        muteWhenJoin: muteWhenJoin,
+        isDND: isDND,
+        isMuted: isMuted,
+        originalStream: originalStream,
+        currentActiveRoomId: currentActiveRoomId,
+        callStatus: callStatus,
+        callTime: callTime,
+        callMetrics: callMetrics,
+        autoAnswer: autoAnswer,
+        microphoneInputLevel: microphoneInputLevel,
+        speakerVolume: speakerVolume,
     },
     actions: {
         init (domain, username, password) {
@@ -136,25 +150,25 @@ export const vsipAPI: VsipAPI = {
                 console.error(e)
             }
         },
-        setActiveCalls (value: number): number {
+        /*setActiveCalls (value: number): number {
             activeCalls.value = value
 
             return activeCalls.value
-        },
+        },*/
         doMute (state: boolean) {
-            openSIPSJS.value.doMute(state)
+            openSIPSJS.value?.doMute(state)
         },
         muteCaller (callId: string, state: boolean) {
-            openSIPSJS.value.muteCaller(callId, state)
+            openSIPSJS.value?.muteCaller(callId, state)
         },
         callTerminate (callId: string) {
-            openSIPSJS.value.callTerminate(callId)
+            openSIPSJS.value?.callTerminate(callId)
         },
         callTransfer (callId: string, target: string) {
-            openSIPSJS.value.callTransfer(callId, target)
+            openSIPSJS.value?.callTransfer(callId, target)
         },
         callMerge (roomId: number) {
-            openSIPSJS.value.callMerge(roomId)
+            openSIPSJS.value?.callMerge(roomId)
         },
         doCallHold ({ callId, toHold, automatic }: DoCallHoldParamsType) {
             const parameters: DoCallHoldParamsType = {
@@ -166,43 +180,55 @@ export const vsipAPI: VsipAPI = {
                 parameters.automatic = automatic
             }
 
-            openSIPSJS.value.doCallHold(parameters)
+            openSIPSJS.value?.doCallHold(parameters)
         },
         callAnswer (callId: string) {
-            openSIPSJS.value.callAnswer(callId)
+            openSIPSJS.value?.callAnswer(callId)
         },
         async callMove (callId: string, roomId: number) {
-            await openSIPSJS.value.callMove(callId, roomId)
+            await openSIPSJS.value?.callMove(callId, roomId)
         },
         msrpAnswer (callId: string) {
-            openSIPSJS.value.msrpAnswer(callId)
+            openSIPSJS.value?.msrpAnswer(callId)
         },
         messageTerminate (callId: string) {
-            openSIPSJS.value.messageTerminate(callId)
+            openSIPSJS.value?.messageTerminate(callId)
         },
         doCall (target: string, addToCurrentRoom = false) {
-            openSIPSJS.value.doCall({
+            openSIPSJS.value?.doCall({
                 target,
                 addToCurrentRoom
             })
         },
         sendMSRP (msrpSessionId: string, body: string) {
-            openSIPSJS.value.sendMSRP(msrpSessionId, body)
+            openSIPSJS.value?.sendMSRP(msrpSessionId, body)
         },
         initMSRP (target: string, body: string, options: object) {
-            openSIPSJS.value.initMSRP(target, body, options)
+            openSIPSJS.value?.initMSRP(target, body, options)
         },
         async setMicrophone (deviceId: string) {
-            await openSIPSJS.value.setMicrophone(deviceId)
+            await openSIPSJS.value?.setMicrophone(deviceId)
         },
         async setSpeaker (deviceId: string) {
-            await openSIPSJS.value.setSpeaker(deviceId)
+            await openSIPSJS.value?.setSpeaker(deviceId)
         },
         sendDTMF (callId: string, value: string) {
-            openSIPSJS.value.sendDTMF(callId, value)
+            openSIPSJS.value?.sendDTMF(callId, value)
         },
         async setCurrentActiveRoomId (roomId: number | undefined) {
-            await openSIPSJS.value.setCurrentActiveRoomId(roomId)
+            await openSIPSJS.value?.setCurrentActiveRoomId(roomId)
+        },
+        setMicrophoneInputLevel (value: number) {
+            microphoneInputLevel.value = value
+            openSIPSJS.value?.setMicrophoneInputLevel(value)
+        },
+        setSpeakerVolume (value: number) {
+            speakerVolume.value = value
+            openSIPSJS.value?.setSpeakerVolume(value)
+        },
+        setAutoAnswer (value: boolean) {
+            autoAnswer.value = value
+            openSIPSJS.value?.setAutoAnswer(value)
         },
     }
 }

@@ -1,6 +1,6 @@
 <template>
     <pre>
-        {{ state.activeCalls }}
+        {{ state.isDND }}
     </pre>
 </template>
 
