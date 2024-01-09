@@ -10,7 +10,7 @@ export interface VsipAPIState {
     activeCalls: Ref<{ [key: string]: ICall }>
     activeMessages: Ref<{ [key: string]: IMessage }>
     addCallToCurrentRoom: Ref<boolean>
-    callAddingInProgress: Ref<boolean>
+    callAddingInProgress: Ref<string | undefined>
     activeRooms: Ref<{ [key: number]: IRoom }>
     msrpHistory: Ref<{ [key: string]: Array<MSRPMessage> }>
     availableMediaDevices: Ref<Array<MediaDeviceInfo>>
@@ -31,8 +31,8 @@ export interface VsipAPIState {
 
 export interface VsipAPIActions {
     init(domain: string, username: string, password: string): void
-    setActiveCalls: (value: number) => number
     muteCaller: (callId: string, state: boolean) => void
+    doMute: (state: boolean) => void
     callTerminate: (callId: string) => void
     callTransfer: (callId: string, target: string) => void
     callMerge: (roomId: number) => void

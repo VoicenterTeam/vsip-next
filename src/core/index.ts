@@ -1,24 +1,17 @@
 import { ref } from 'vue'
-import OpenSIPSJS, {
-    IRoom,
-    ICall,
-    IMessage,
-    RoomChangeEmitType,
-    RTCSessionEvent,
-    MSRPSessionEvent,
-    MSRPMessage,
-    MSRPSessionExtended,
-    ICallStatus,
-    ITimeData,
-    IDoCallParam
-} from '@voicenter-team/opensips-js'
+import OpenSIPSJS from '@voicenter-team/opensips-js'
+import { ITimeData } from '@voicenter-team/opensips-js/src/types/timer'
+//import { RTCSessionEvent } from 'jssip/lib/UA'
+import { ICall, IRoom, ICallStatus } from '@voicenter-team/opensips-js/src/types/rtc'
+import { IMessage, MSRPMessage } from '@voicenter-team/opensips-js/src/types/msrp'
+
 import { VsipAPI, DoCallHoldParamsType } from '@/types'
 
 const activeCalls = ref<{ [key: string]: ICall }>({})
 const activeMessages = ref<{ [key: string]: IMessage }>({})
 const openSIPSJS = ref<OpenSIPSJS | undefined>(undefined)
 const addCallToCurrentRoom = ref<boolean>(false)
-const callAddingInProgress = ref<boolean>(false)
+const callAddingInProgress = ref<string | undefined>(undefined)
 const activeRooms = ref<{ [key: number]: IRoom }>({})
 const msrpHistory = ref<{ [key: string]: Array<MSRPMessage> }>({})
 const availableMediaDevices = ref<Array<MediaDeviceInfo>>([])
@@ -82,67 +75,61 @@ export const vsipAPI: VsipAPI = {
                     .on('ready', () => {
                         addCallToCurrentRoom.value = false
                     })
-                    .on('changeActiveCalls', (sessions: { [k: string]: ICall }) => {
+                    .on('changeActiveCalls', (sessions) => {
                         activeCalls.value = { ...sessions }
                     })
-                    .on('changeActiveMessages', (sessions: { [p: string]: IMessage }) => {
-                        activeMessages.value = { ...sessions }
+                    .on('changeActiveMessages', (sessions) => {
+                        activeMessages.value = { ...sessions as { [key: string]: IMessage } }
                     })
-                    .on('newRTCSession', ({ session }: RTCSessionEvent) => {
-                        console.log('e', session)
-                    })
-                    .on('newMSRPSession', ({ session }: MSRPSessionEvent) => {
-                        console.log('e', session)
-                    })
-                    .on('newMSRPMessage', (msg: { message: MSRPMessage, session: MSRPSessionExtended }) => {
-                        const sessionId = msg.session._id
+                    .on('newMSRPMessage', (data) => {
+                        const sessionId = data.session._id
                         const sessionMessages = msrpHistory.value[sessionId] || []
-                        sessionMessages.push()
+                        sessionMessages.push(data.message)
                         msrpHistory.value[sessionId] = [ ...sessionMessages ]
                     })
-                    .on('callAddingInProgressChanged', (value: boolean) => {
+                    .on('callAddingInProgressChanged', (value) => {
                         callAddingInProgress.value = value
                     })
-                    .on('changeAvailableDeviceList', (devices: Array<MediaDeviceInfo>) => {
+                    .on('changeAvailableDeviceList', (devices) => {
                         availableMediaDevices.value = [ ...devices ]
                     })
-                    .on('changeActiveInputMediaDevice', (data: string) => {
+                    .on('changeActiveInputMediaDevice', (data) => {
                         selectedInputDevice.value = data
                     })
-                    .on('changeActiveOutputMediaDevice', (data: string) => {
+                    .on('changeActiveOutputMediaDevice', (data) => {
                         selectedOutputDevice.value = data
                     })
-                    .on('changeMuteWhenJoin', (value: boolean) => {
+                    .on('changeMuteWhenJoin', (value) => {
                         muteWhenJoin.value = value
                     })
-                    .on('changeIsDND', (value: boolean) => {
+                    .on('changeIsDND', (value) => {
                         isDND.value = value
                     })
-                    .on('changeIsMuted', (value: boolean) => {
+                    .on('changeIsMuted', (value) => {
                         isMuted.value = value
                     })
-                    .on('changeOriginalStream', (value: MediaStream) => {
+                    .on('changeOriginalStream', (value) => {
                         originalStream.value = value
                     })
-                    .on('currentActiveRoomChanged', (id: number | undefined) => {
+                    .on('currentActiveRoomChanged', (id) => {
                         currentActiveRoomId.value = id
                     })
-                    .on('addRoom', ({ roomList }: RoomChangeEmitType) => {
+                    .on('addRoom', ({ roomList }) => {
                         activeRooms.value = { ...roomList }
                     })
-                    .on('updateRoom', ({ roomList }: RoomChangeEmitType) => {
+                    .on('updateRoom', ({ roomList }) => {
                         activeRooms.value = { ...roomList }
                     })
-                    .on('removeRoom', ({ roomList }: RoomChangeEmitType) => {
+                    .on('removeRoom', ({ roomList }) => {
                         activeRooms.value = { ...roomList }
                     })
-                    .on('changeCallStatus', (data: { [key: string]: ICallStatus }) => {
+                    .on('changeCallStatus', (data) => {
                         callStatus.value = { ...data }
                     })
-                    .on('changeCallTime', (data: { [key: string]: ITimeData }) => {
+                    .on('changeCallTime', (data) => {
                         callTime.value = { ...data }
                     })
-                    .on('changeCallMetrics', (data: { [key: string]: unknown }) => {
+                    .on('changeCallMetrics', (data) => {
                         callMetrics.value = { ...data }
                     })
                     .begin()
@@ -150,11 +137,6 @@ export const vsipAPI: VsipAPI = {
                 console.error(e)
             }
         },
-        /*setActiveCalls (value: number): number {
-            activeCalls.value = value
-
-            return activeCalls.value
-        },*/
         doMute (state: boolean) {
             openSIPSJS.value?.doMute(state)
         },

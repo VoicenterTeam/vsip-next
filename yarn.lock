@@ -517,10 +517,10 @@
   dependencies:
     "@voicenter-team/eslint-config-ts" "1.0.21"
 
-"@voicenter-team/opensips-js@^1.0.22":
-  version "1.0.22"
-  resolved "https://registry.yarnpkg.com/@voicenter-team/opensips-js/-/opensips-js-1.0.22.tgz#965675673050ff0f62da93ae49ea842253194353"
-  integrity sha512-O2uT4R2heZPMNrOQtTSx3WJiZ3AoUhrfa7DMtmbtekSPeS64eB4RdcvJVD96CpNp6Y2hFHRZwzeThGr8RhACDA==
+"@voicenter-team/opensips-js@1.0.42":
+  version "1.0.42"
+  resolved "http://localhost:4873/@voicenter-team/opensips-js/-/opensips-js-1.0.42.tgz#0f02d00613bcb7d10df8e41aca7ec6f032250d90"
+  integrity sha512-azcH/wOTKT7F8Cc1Tq5pLmK6d4ryKpVAL3EmvirKAYRHMEsDUFpReW07+2qc5L9gq/iUunlXh/gnExLJvh6+NA==
   dependencies:
     "@types/mime" "^3.0.1"
     generate-unique-id "^2.0.1"
@@ -1924,7 +1924,7 @@ jsonfile@^6.0.1:
 
 jssip@3.10.0:
   version "3.10.0"
-  resolved "https://registry.yarnpkg.com/jssip/-/jssip-3.10.0.tgz#ed61e189c756e5974adfdb212b3e0e3e74ac1e7a"
+  resolved "http://localhost:4873/jssip/-/jssip-3.10.0.tgz#ed61e189c756e5974adfdb212b3e0e3e74ac1e7a"
   integrity sha512-iJj+bhnNl0S296sUDc2ZjIbAetnelzZ92aWARyW01oKZ0X8t+5aGrYfJdMFliLFm8hxMcnkep3vmSRGe/yRjsA==
   dependencies:
     "@types/debug" "^4.1.7"
