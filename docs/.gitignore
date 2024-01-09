@@ -14,3 +14,5 @@ src/.vuepress/components/DemoView.vue
 src/demo.md
 src/index.md
 src/.vuepress/dist
+src/.vuepress/.cache
+src/.vuepress/.temp
