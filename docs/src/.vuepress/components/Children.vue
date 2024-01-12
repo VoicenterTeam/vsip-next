@@ -33,6 +33,7 @@
             <VcButton
                 color="primary"
                 :disabled="muteButtonDisabled"
+                @click="doMute(!isMuted)"
             >
                 {{ muteButtonText }}
             </VcButton>
@@ -240,7 +241,8 @@ const {
     callMerge,
     doCallHold,
     callAnswer,
-    callMove
+    callMove,
+    doMute
 } = actions
 
 /* Data */

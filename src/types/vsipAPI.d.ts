@@ -1,4 +1,4 @@
-import type { Ref } from 'vue'
+import type { Ref, ComputedRef } from 'vue'
 import { ICall, ICallStatus, IMessage, IRoom, ITimeData, MSRPMessage } from '@voicenter-team/opensips-js'
 
 export interface VsipAPI {
@@ -6,14 +6,20 @@ export interface VsipAPI {
     actions: VsipAPIActions
 }
 
+export type MediaDeviceOption = Omit<MediaDeviceInfo, 'toJSON'>
+
 export interface VsipAPIState {
+    isInitialized: Ref<boolean>
     activeCalls: Ref<{ [key: string]: ICall }>
+    callsInActiveRoom: ComputedRef<Array<ICall>>
     activeMessages: Ref<{ [key: string]: IMessage }>
     addCallToCurrentRoom: Ref<boolean>
     callAddingInProgress: Ref<string | undefined>
     activeRooms: Ref<{ [key: number]: IRoom }>
     msrpHistory: Ref<{ [key: string]: Array<MSRPMessage> }>
     availableMediaDevices: Ref<Array<MediaDeviceInfo>>
+    inputMediaDeviceList: Ref<Array<MediaDeviceOption>>
+    outputMediaDeviceList: Ref<Array<MediaDeviceOption>>
     selectedOutputDevice: Ref<string>
     selectedInputDevice: Ref<string>
     muteWhenJoin: Ref<boolean>
@@ -33,6 +39,8 @@ export interface VsipAPIActions {
     init(domain: string, username: string, password: string): void
     muteCaller: (callId: string, state: boolean) => void
     doMute: (state: boolean) => void
+    setMuteWhenJoin: (state: boolean) => void
+    setDND: (state: boolean) => void
     callTerminate: (callId: string) => void
     callTransfer: (callId: string, target: string) => void
     callMerge: (roomId: number) => void

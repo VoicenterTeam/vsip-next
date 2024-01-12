@@ -10,7 +10,7 @@ import Children from './Children.vue'
 import { useVsipProvide } from '@/index'
 
 const { actions, state } = useVsipProvide()
-actions.init('sip06.voicenter.co', 'YI3SEDhZ', 'FwT2NFr18eWMDwXS')
+actions.init('wss07.voicenter.co', '', '')
 </script>
 
 <style lang="css" src="@voicenter-team/voicenter-ui-plus/library/style.css"></style>
