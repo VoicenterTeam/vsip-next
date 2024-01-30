@@ -4,7 +4,7 @@
             <div>
                 <span>Microphone</span>
                 <VcSelect
-                    v-model="state.selectedInputDevice"
+                    v-model="selectedInputDevice"
                     :options="inputDeviceOptions"
                     :config="{ labelKey: 'label', valueKey: 'deviceId' }"
                 />
@@ -12,7 +12,7 @@
             <div>
                 <span>Speaker</span>
                 <VcSelect
-                    v-model="state.selectedOutputDevice"
+                    v-model="selectedOutputDevice"
                     :options="outputDeviceOptions"
                     :config="{ labelKey: 'label', valueKey: 'deviceId' }"
                 />
@@ -123,11 +123,13 @@
             </span>
             <div>
                 <span>Your room:</span>
-                <VcSelect
-                    v-model="currentActiveRoomId"
-                    :options="roomsListOptions"
-                    :config="{ labelKey: 'label', valueKey: 'roomId' }"
-                />
+                <div class="w-36">
+                    <VcSelect
+                        v-model="currentActiveRoomId"
+                        :options="roomsListOptions"
+                        :config="{ labelKey: 'label', valueKey: 'roomId' }"
+                    />
+                </div>
             </div>
         </section>
 
@@ -137,10 +139,10 @@
             </span>
 
             <div v-for="room in roomsList" :key="room.roomId">
-                <span>Room {{ room.roomId }}</span>:({{ room.started }})
+                <span>Room {{ room.roomId }}</span>: ({{ room.started }})
                 <br>
                 <ul>
-                    <li v-for="(call, index) in getActiveCallsInRoom(room.roomId)" :key="index">
+                    <li v-for="(call, index) in getActiveCallsInRoom(room.roomId)" :key="index" class="p-2">
 
                         <b>{{ call._remote_identity }}</b>
 
@@ -195,7 +197,7 @@
                             Answer
                         </VcButton>
 
-                        <div class="w-1/2">
+                        <div>
                             <CallMoveSelect
                                 :call="call"
                                 :rooms-list="roomsList"
@@ -219,6 +221,8 @@ import { CONSTRAINTS } from '../enum'
 
 const { state, actions } = useVsipInject()
 const {
+    selectedInputDevice,
+    selectedOutputDevice,
     muteWhenJoin,
     isDND,
     addCallToCurrentRoom,
@@ -249,12 +253,6 @@ const {
 
 const targetInput = ref<string>('')
 const dtmfInput = ref<string>('')
-
-/*const valll = ref<number | undefined>()
-
-setTimeout(() => {
-    valll.value = 2
-}, 3000)*/
 
 /* Computed */
 
@@ -294,11 +292,7 @@ const roomsListOptions = computed(() => {
     }))
     const allOptions = [
         unselectedOption,
-        ...rooms/*,
-        {
-            roomId: 2,
-            label: 'value 2'
-        }*/
+        ...rooms
     ]
     return allOptions
 })
@@ -311,8 +305,7 @@ const onPhoneInputSubmit = (event) => {
     if (callAddingInProgress.value) {
         return
     }
-    console.log('targetInput.value', targetInput.value)
-    console.log('addCallToCurrentRoom.value', addCallToCurrentRoom.value)
+
     doCall(targetInput.value, addCallToCurrentRoom.value)
     targetInput.value = ''
 }

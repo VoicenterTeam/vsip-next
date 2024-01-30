@@ -25,7 +25,7 @@ const originalStream = ref<MediaStream | null>(null)
 const currentActiveRoomId = ref<number | undefined>(undefined)
 const autoAnswer = ref<boolean>(false)
 const microphoneInputLevel = ref<number>(2) // [0;2]
-const speakerVolume = ref<number>(2) // [0;1]
+const speakerVolume = ref<number>(1) // [0;1]
 const callStatus = ref<{ [key: string]: ICallStatus }>({})
 const callTime = ref<{ [key: string]: ITimeData }>({})
 const callMetrics = ref<{ [key: string]: unknown }>({})
@@ -56,7 +56,13 @@ const callsInActiveRoom = computed(() => {
     return Object.values(activeCalls.value).filter((call) => call.roomId === currentActiveRoomId.value)
 })
 
-//callsInActiveRoom.value[0].roomId
+watch(selectedInputDevice, async (newValue) => {
+    await vsipAPI.actions.setMicrophone(newValue)
+})
+
+watch(selectedOutputDevice, async (newValue) => {
+    await vsipAPI.actions.setSpeaker(newValue)
+})
 
 watch(muteWhenJoin, (newValue) => {
     vsipAPI.actions.setMuteWhenJoin(newValue)
@@ -68,6 +74,10 @@ watch(isDND, (newValue) => {
 
 watch(microphoneInputLevel, (newValue) => {
     vsipAPI.actions.setMicrophoneInputLevel(newValue)
+})
+
+watch(speakerVolume, (newValue) => {
+    vsipAPI.actions.setSpeakerVolume(newValue)
 })
 
 watch(currentActiveRoomId, async (newValue) => {
@@ -127,6 +137,7 @@ export const vsipAPI: VsipAPI = {
                         isInitialized.value = true
                     })
                     .on('changeActiveCalls', (sessions) => {
+                        console.log('changeActiveCalls', sessions)
                         activeCalls.value = { ...sessions }
                     })
                     .on('changeActiveMessages', (sessions) => {
