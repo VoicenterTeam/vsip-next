@@ -517,10 +517,10 @@
   dependencies:
     "@voicenter-team/eslint-config-ts" "1.0.21"
 
-"@voicenter-team/opensips-js@1.0.62":
-  version "1.0.62"
-  resolved "http://localhost:4873/@voicenter-team/opensips-js/-/opensips-js-1.0.62.tgz#3247e75161814966890bc70e667893ea82fd02c1"
-  integrity sha512-RdXoxy88UTNdVefvlw+zNq16h4MfgrAQ3yKbGqn0ty91xRyDxabNC8CgviLFAYwirnrSdOSjFM8LynyNbQhz1g==
+"@voicenter-team/opensips-js@1.0.46":
+  version "1.0.46"
+  resolved "https://registry.yarnpkg.com/@voicenter-team/opensips-js/-/opensips-js-1.0.46.tgz#a9fc288b76dd608980ee24880f6b2c362e03dab9"
+  integrity sha512-cfKKG/esD/0Bkyiqsblr+KCWYEeN7x0gd+hHYTdpCJGLUnq6tKjkrtMExHndd79Lz4SzmYvGSGdWrkrE7C//HA==
   dependencies:
     "@types/mime" "^3.0.1"
     generate-unique-id "^2.0.1"
@@ -907,6 +907,11 @@ concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.npmjs.org/concat-map/-/concat-map-0.0.1.tgz"
   integrity sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==
+
+core-js@3.8.3:
+  version "3.8.3"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.8.3.tgz#c21906e1f14f3689f93abcc6e26883550dd92dd0"
+  integrity sha512-KPYXeVZYemC2TkNEkX/01I+7yd+nX3KddKwZ1Ww7SKWdI2wQprSgLmrTddT8nw92AjEklTsPBoSdQBhbI1bQ6Q==
 
 cross-env@7.0.3:
   version "7.0.3"

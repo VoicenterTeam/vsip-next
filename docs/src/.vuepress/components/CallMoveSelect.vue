@@ -16,6 +16,7 @@
 <script setup lang="ts">
 import { nextTick, onMounted, PropType, ref, watch } from 'vue'
 import { useVsipInject } from '@/index'
+//import { useVsipInject } from '../../../../library/super.mjs'
 import { ICall, IRoom } from '@voicenter-team/opensips-js/src/types/rtc'
 
 const { state, actions } = useVsipInject()

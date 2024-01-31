@@ -6,7 +6,7 @@ import { IMessage, MSRPMessage } from '@voicenter-team/opensips-js/src/types/msr
 
 import { VsipAPI, DoCallHoldParamsType } from '@/types'
 
-let openSIPSJS: OpenSIPSJS | undefined = undefined //ref<OpenSIPSJS | undefined>(undefined)
+let openSIPSJS: OpenSIPSJS | undefined = undefined
 
 const isInitialized = ref<boolean>(false)
 const activeCalls = ref<{ [key: string]: ICall }>({})

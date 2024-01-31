@@ -1,5 +1,7 @@
 import type { Ref, ComputedRef } from 'vue'
-import { ICall, ICallStatus, IMessage, IRoom, ITimeData, MSRPMessage } from '@voicenter-team/opensips-js'
+import { ICallStatus, ICall, IRoom } from '@voicenter-team/opensips-js/src/types/rtc'
+import { ITimeData } from '@voicenter-team/opensips-js/src/types/timer'
+import { MSRPMessage, IMessage } from '@voicenter-team/opensips-js/src/types/msrp'
 
 export interface VsipAPI {
     state: VsipAPIState
@@ -49,7 +51,7 @@ export interface VsipAPIActions {
     callMove: (callId: string, roomId: number) => Promise<void>
     msrpAnswer: (callId: string) => void
     messageTerminate: (callId: string) => void
-    doCall: (target: string, addToCurrentRoom = false) => void
+    doCall: (target: string, addToCurrentRoom: boolean) => void
     sendMSRP: (msrpSessionId: string, body: string) => void
     initMSRP: (target: string, body: string, options: object) => void
     setMicrophone: (deviceId: string) => Promise<void>

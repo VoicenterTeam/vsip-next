@@ -216,6 +216,7 @@
 import { ICall, IRoom } from '@voicenter-team/opensips-js/src/types/rtc'
 import CallMoveSelect from './CallMoveSelect.vue'
 import { useVsipInject } from '@/index'
+//import { useVsipInject } from '../../../../library/super.mjs'
 import { computed, ref } from "vue"
 import { CONSTRAINTS } from '../enum'
 
