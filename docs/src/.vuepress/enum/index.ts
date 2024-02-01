@@ -1,0 +1,5 @@
+export const CONSTRAINTS = {
+    CALL_DIRECTION_OUTGOING: 'outgoing',
+    CALL_DIRECTION_INCOMING: 'incoming',
+    CALL_STATUS_UNANSWERED: 0
+}

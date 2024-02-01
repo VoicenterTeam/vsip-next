@@ -1,8 +1,7 @@
-import { resolve, join } from 'node:path'
+import { resolve } from 'node:path'
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import dts from 'vite-plugin-dts'
-import Inspect from 'vite-plugin-inspect'
 
 const OUTPUT_DIR = 'library'
 
@@ -19,13 +18,14 @@ export default ({ mode }) => {
         plugins: [
             vue(),
             dts({
-                outDir: join(OUTPUT_DIR, 'types')
+                rollupTypes: true,
+                copyDtsFiles: true
             }),
-            Inspect()
         ],
         build: {
             outDir: OUTPUT_DIR,
             sourcemap: true,
+            target: 'es6',
             commonjsOptions: {
                 esmExternals: true
             },
@@ -44,6 +44,7 @@ export default ({ mode }) => {
                 }
             }
         },
+        base: './',
         resolve: {
             alias: {
                 '@': resolve(__dirname, './src')

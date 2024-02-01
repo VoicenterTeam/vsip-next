@@ -12,7 +12,6 @@
     "esModuleInterop": true,
     "declaration": true,
     "allowJs": true,
-    "declarationDir": "library/types",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "importHelpers": true,
@@ -38,6 +37,5 @@
     }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "exclude": ["public/**/*", "node_modules"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "exclude": ["public/**/*", "node_modules"]
 }

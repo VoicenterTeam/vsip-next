@@ -29,9 +29,7 @@ export default defineUserConfig({
                 link: '/',
                 collapsible: false,
                 children: [
-                    'components',
-                    'parameters',
-                    'types',
+                    'documentation',
                     'example'
                 ]
             }
