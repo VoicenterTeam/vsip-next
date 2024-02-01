@@ -517,7 +517,7 @@
   dependencies:
     "@voicenter-team/eslint-config-ts" "1.0.21"
 
-"@voicenter-team/opensips-js@1.0.46":
+"@voicenter-team/opensips-js@^1.0.46":
   version "1.0.46"
   resolved "https://registry.yarnpkg.com/@voicenter-team/opensips-js/-/opensips-js-1.0.46.tgz#a9fc288b76dd608980ee24880f6b2c362e03dab9"
   integrity sha512-cfKKG/esD/0Bkyiqsblr+KCWYEeN7x0gd+hHYTdpCJGLUnq6tKjkrtMExHndd79Lz4SzmYvGSGdWrkrE7C//HA==
@@ -1929,7 +1929,7 @@ jsonfile@^6.0.1:
 
 jssip@3.10.0:
   version "3.10.0"
-  resolved "http://localhost:4873/jssip/-/jssip-3.10.0.tgz#ed61e189c756e5974adfdb212b3e0e3e74ac1e7a"
+  resolved "https://registry.yarnpkg.com/jssip/-/jssip-3.10.0.tgz#ed61e189c756e5974adfdb212b3e0e3e74ac1e7a"
   integrity sha512-iJj+bhnNl0S296sUDc2ZjIbAetnelzZ92aWARyW01oKZ0X8t+5aGrYfJdMFliLFm8hxMcnkep3vmSRGe/yRjsA==
   dependencies:
     "@types/debug" "^4.1.7"
@@ -1979,9 +1979,9 @@ lodash@^4.17.21, lodash@~4.17.15:
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
 
 loglevel@^1.8.1:
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/loglevel/-/loglevel-1.8.1.tgz#5c621f83d5b48c54ae93b6156353f555963377b4"
-  integrity sha512-tCRIJM51SHjAayKwC+QAg8hT8vg6z7GSgLJKGvzuPb1Wc+hLzqtuVLxp6/HzSPOozuK+8ErAhy7U/sVzw8Dgfg==
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/loglevel/-/loglevel-1.9.1.tgz#d63976ac9bcd03c7c873116d41c2a85bafff1be7"
+  integrity sha512-hP3I3kCrDIMuRwAwHltphhDM1r8i55H33GgqjXbrisuJhF4kRhW1dNuxsRklp4bXl8DSdLaNLuiL4A/LWRfxvg==
 
 lru-cache@^6.0.0:
   version "6.0.0"
@@ -2366,9 +2366,9 @@ safe-regex-test@^1.0.0:
     is-regex "^1.1.4"
 
 sdp-transform@^2.14.1:
-  version "2.14.1"
-  resolved "https://registry.yarnpkg.com/sdp-transform/-/sdp-transform-2.14.1.tgz#2bb443583d478dee217df4caa284c46b870d5827"
-  integrity sha512-RjZyX3nVwJyCuTo5tGPx+PZWkDMCg7oOLpSlhjDdZfwUoNqG1mM8nyj31IGHyaPWXhjbP7cdK3qZ2bmkJ1GzRw==
+  version "2.14.2"
+  resolved "https://registry.yarnpkg.com/sdp-transform/-/sdp-transform-2.14.2.tgz#d2cee6a1f7abe44e6332ac6cbb94e8600f32d813"
+  integrity sha512-icY6jVao7MfKCieyo1AyxFYm1baiM+fA00qW/KrNNVlkxHAd34riEKuEkUe4bBb3gJwLJZM+xT60Yj1QL8rHiA==
 
 semver@^6.3.0:
   version "6.3.0"
