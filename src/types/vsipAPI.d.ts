@@ -39,32 +39,29 @@ export interface VsipAPIState {
 
 export interface VsipAPIActions {
     init(domain: string, username: string, password: string): void
-    muteCaller: (callId: string, state: boolean) => void
-    doMute: (state: boolean) => void
+    muteCaller: (callId: string) => void
+    unmuteCaller: (callId: string) => void
+    mute: () => void
+    unmute: () => void
     setMuteWhenJoin: (state: boolean) => void
     setDND: (state: boolean) => void
-    callTerminate: (callId: string) => void
-    callTransfer: (callId: string, target: string) => void
-    callMerge: (roomId: number) => void
-    doCallHold: (params: DoCallHoldParamsType) => void
-    callAnswer: (callId: string) => void
-    callMove: (callId: string, roomId: number) => Promise<void>
+    terminateCall: (callId: string) => void
+    transferCall: (callId: string, target: string) => void
+    mergeCall: (roomId: number) => void
+    holdCall: (callId: string, automatic?: boolean) => void
+    unholdCall: (callId: string) => void
+    answerCall: (callId: string) => void
+    moveCall: (callId: string, roomId: number) => Promise<void>
     msrpAnswer: (callId: string) => void
     messageTerminate: (callId: string) => void
-    doCall: (target: string, addToCurrentRoom: boolean) => void
+    initCall: (target: string, addToCurrentRoom: boolean) => void
     sendMSRP: (msrpSessionId: string, body: string) => void
     initMSRP: (target: string, body: string, options: object) => void
     setMicrophone: (deviceId: string) => Promise<void>
     setSpeaker: (deviceId: string) => Promise<void>
     sendDTMF: (callId: string, value: string) => void
-    setCurrentActiveRoomId: (roomId: number | undefined) => Promise<void>
-    setMicrophoneInputLevel: (value: number) => void
+    setActiveRoom: (roomId: number | undefined) => Promise<void>
+    setMicrophoneSensitivity: (value: number) => void
     setSpeakerVolume: (value: number) => void
     setAutoAnswer: (value: boolean) => void
-}
-
-export interface DoCallHoldParamsType {
-    callId: string
-    toHold: boolean
-    automatic?: boolean
 }
