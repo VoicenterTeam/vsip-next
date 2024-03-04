@@ -22,7 +22,7 @@ import { ICall, IRoom } from '@voicenter-team/opensips-js/src/types/rtc'
 const { state, actions } = useVsipInject()
 
 const {
-    callMove
+    moveCall
 } = actions
 
 const props = defineProps({
@@ -43,7 +43,7 @@ watch(activeCallRoomId, (newV, oldV) => {
     if (newV === oldV || isFirstRender.value) {
         return
     }
-    callMove(props.call._id, newV)
+    moveCall(props.call._id, newV)
 })
 
 onMounted(() => {

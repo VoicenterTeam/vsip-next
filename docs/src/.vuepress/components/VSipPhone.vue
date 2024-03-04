@@ -72,17 +72,17 @@
 
         <section class="xs:w-full sm:w-1/2 lg:w-1/3 pb-4">
             <div>
-                <span>Microphone sensitivity (between 0 and 2)</span>
+                <span>Microphone sensitivity</span>
                 <VcSlider
                     v-model="microphoneInputLevel"
                     :min="0"
-                    :max="2"
+                    :max="1"
                     :step="0.1"
                 />
             </div>
 
             <div>
-                <span>Speaker volume (between 0 and 1)</span>
+                <span>Speaker volume</span>
                 <VcSlider
                     v-model="speakerVolume"
                     :min="0"
@@ -149,7 +149,7 @@
                         <VcButton
                             class="ml-2"
                             color="primary"
-                            @click="muteCaller(call._id, !call.localMuted)"
+                            @click="doCallerMute(call._id, !call.localMuted)"
                         >
                             {{ call.localMuted ? 'Unmute' : 'Mute' }}
                         </VcButton>
@@ -157,7 +157,7 @@
                         <VcButton
                             class="ml-2"
                             color="destructive-actions"
-                            @click="callTerminate(call._id)"
+                            @click="terminateCall(call._id)"
                         >
                             Hangup
                         </VcButton>
@@ -165,7 +165,7 @@
                         <VcButton
                             class="ml-2"
                             color="primary"
-                            @click="transferCall(call._id)"
+                            @click="doCallTransfer(call._id)"
                         >
                             Transfer
                         </VcButton>
@@ -174,7 +174,7 @@
                             v-if="getActiveCallsInRoom(room.roomId).length === 2"
                             class="ml-2"
                             color="primary"
-                            @click="callMerge(room.roomId)"
+                            @click="mergeCall(room.roomId)"
                         >
                             Merge room {{room.roomId}}
                         </VcButton>
@@ -183,7 +183,7 @@
                             class="ml-2"
                             color="primary"
                             :disabled="isHoldButtonDisable(call)"
-                            @click="doCallHold({ callId: call._id, toHold: !call._localHold })"
+                            @click="doCallHold(call._id, !call._localHold)"
                         >
                             {{ call._localHold ? 'UnHold' : 'Hold' }}
                         </VcButton>
@@ -192,7 +192,7 @@
                             v-if="call.direction !== CONSTRAINTS.CALL_DIRECTION_OUTGOING && !call._is_confirmed"
                             class="ml-2"
                             color="primary"
-                            @click="callAnswer(call._id)"
+                            @click="answerCall(call._id)"
                         >
                             Answer
                         </VcButton>
@@ -238,16 +238,19 @@ const {
 } = state
 
 const {
-    doCall,
+    initCall,
     sendDTMF,
     muteCaller,
-    callTerminate,
-    callTransfer,
-    callMerge,
-    doCallHold,
-    callAnswer,
-    callMove,
-    doMute
+    unmuteCaller,
+    terminateCall,
+    transferCall,
+    mergeCall,
+    holdCall,
+    unholdCall,
+    answerCall,
+    moveCall,
+    mute,
+    unmute
 } = actions
 
 /* Data */
@@ -307,7 +310,7 @@ const onPhoneInputSubmit = (event) => {
         return
     }
 
-    doCall(targetInput.value, addCallToCurrentRoom.value)
+    initCall(targetInput.value, addCallToCurrentRoom.value)
     targetInput.value = ''
 }
 
@@ -326,11 +329,35 @@ const getActiveCallsInRoom = (roomId: number): Array<ICall> => {
     return Object.values(activeCalls.value).filter((call: ICall) => call.roomId === roomId)
 }
 
-const transferCall = (callId: string) => {
+const doCallTransfer = (callId: string) => {
     const target = prompt('Please enter target:')
 
     if (target !== null || target !== '') {
-        callTransfer(callId, target)
+        transferCall(callId, target)
+    }
+}
+
+const doCallHold = (callId: string, toHold: boolean) => {
+    if (toHold) {
+        holdCall(callId)
+    } else {
+        unholdCall(callId)
+    }
+}
+
+const doCallerMute = (callId: string, toMute: boolean) => {
+    if (toMute) {
+        muteCaller(callId)
+    } else {
+        unmuteCaller(callId)
+    }
+}
+
+const doMute = (value: boolean) => {
+    if (value) {
+        mute()
+    } else {
+        unmute()
     }
 }
 

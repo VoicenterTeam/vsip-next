@@ -50,16 +50,19 @@ const {
 } = state
 
 const {
-  doCall,
+  initCall,
   sendDTMF,
   muteCaller,
-  callTerminate,
-  callTransfer,
-  callMerge,
-  doCallHold,
-  callAnswer,
-  callMove,
-  doMute
+  unmuteCaller,
+  terminateCall,
+  transferCall,
+  mergeCall,
+  holdCall,
+  unholdCall,
+  answerCall,
+  moveCall,
+  mute,
+  unmute
 } = actions
 
 /* Other code */
@@ -100,24 +103,26 @@ const {
 | Name              | Typing                | Description   |
 |-------------------|:---------------------------|:-------|
 | init | (domain: string, username: string, password: string): void | Initialize opensips-js |
-| muteCaller | (callId: string, state: boolean) => void | Mute / unmute caller |
+| muteCaller | (callId: string) => void | Mute caller |
+| unmuteCaller | (callId: string) => void | Unmute caller |
 | doMute | (state: boolean) => void | Mute / unmute agent |
 | setDND | (state: boolean) => void | Set 'Do not Disturb' option |
-| callTerminate | (callId: string) => void | Hangup call |
-| callTransfer | (callId: string, target: string) => void | Transfer call |
-| callMerge | (roomId: number) => void | Merge calls in room (works only when 2 call in room) |
-| doCallHold | (params: DoCallHoldParamsType) => void | Hold / unhold call |
-| callAnswer | (callId: string) => void | Answer call |
-| callMove | (callId: string, roomId: number) => Promise\<void> | Move call to another room |
+| terminateCall | (callId: string) => void | Hangup call |
+| transferCall | (callId: string, target: string) => void | Transfer call |
+| mergeCall | (roomId: number) => void | Merge calls in room (works only when 2 call in room) |
+| holdCall | (callId: string, automatic?: boolean) => void | Put call on hold |
+| unholdCall | (callId: string) => void | Unhold a call |
+| answerCall | (callId: string) => void | Answer call |
+| moveCall | (callId: string, roomId: number) => Promise\<void> | Move call to another room |
 | msrpAnswer | (callId: string) => void | Answer MSRP invite |
 | messageTerminate | (callId: string) => void | Terminate MSRP session |
-| doCall | (target: string, addToCurrentRoom: boolean) => void | Make a call |
+| initCall | (target: string, addToCurrentRoom: boolean) => void | Make a call |
 | sendMSRP | (msrpSessionId: string, body: string) => void | Send MSRP message |
 | initMSRP | (target: string, body: string, options: object) => void | Send MSRP invite |
 | setMicrophone | (deviceId: string) => Promise\<void> | Set microphone which to use |
 | setSpeaker | (deviceId: string) => Promise\<void> | Set speaker which to use |
 | sendDTMF | (callId: string, value: string) => void | Send DTMF |
-| setCurrentActiveRoomId | (roomId: number / undefined) => Promise\<void> | Set current active room |
-| setMicrophoneInputLevel | (value: number) => void | Set microphone sensitivity |
+| setActiveRoom | (roomId: number / undefined) => Promise\<void> | Set current active room |
+| setMicrophoneSensitivity | (value: number) => void | Set microphone sensitivity |
 | setSpeakerVolume | (value: number) => void | Set speaker volume |
 | setAutoAnswer | (value: boolean) => void | Set auto-answer |

@@ -4,7 +4,7 @@ import { ITimeData } from '@voicenter-team/opensips-js/src/types/timer'
 import { ICall, IRoom, ICallStatus } from '@voicenter-team/opensips-js/src/types/rtc'
 import { IMessage, MSRPMessage } from '@voicenter-team/opensips-js/src/types/msrp'
 
-import { VsipAPI, DoCallHoldParamsType } from '@/types'
+import { VsipAPI } from '@/types'
 
 let openSIPSJS: OpenSIPSJS | undefined = undefined
 
@@ -73,7 +73,7 @@ watch(isDND, (newValue) => {
 })
 
 watch(microphoneInputLevel, (newValue) => {
-    vsipAPI.actions.setMicrophoneInputLevel(newValue)
+    vsipAPI.actions.setMicrophoneSensitivity(newValue)
 })
 
 watch(speakerVolume, (newValue) => {
@@ -81,7 +81,7 @@ watch(speakerVolume, (newValue) => {
 })
 
 watch(currentActiveRoomId, async (newValue) => {
-    await vsipAPI.actions.setCurrentActiveRoomId(newValue)
+    await vsipAPI.actions.setActiveRoom(newValue)
 })
 
 
@@ -170,7 +170,7 @@ export const vsipAPI: VsipAPI = {
                     .on('changeIsMuted', (value) => {
                         isMuted.value = value
                     })
-                    .on('changeOriginalStream', (value) => {
+                    .on('changeActiveStream', (value) => {
                         originalStream.value = value
                     })
                     .on('currentActiveRoomChanged', (id) => {
@@ -199,62 +199,47 @@ export const vsipAPI: VsipAPI = {
                 console.error(e)
             }
         },
-        doMute (state: boolean) {
-            openSIPSJS?.doMute(state)
+        initCall (target: string, addToCurrentRoom = false) {
+            openSIPSJS?.initCall(target, addToCurrentRoom)
+        },
+        answerCall (callId: string) {
+            openSIPSJS?.answerCall(callId)
+        },
+        terminateCall (callId: string) {
+            openSIPSJS?.terminateCall(callId)
+        },
+        mute () {
+            openSIPSJS?.mute()
+        },
+        unmute () {
+            openSIPSJS?.unmute()
+        },
+        transferCall (callId: string, target: string) {
+            openSIPSJS?.transferCall(callId, target)
+        },
+        mergeCall (roomId: number) {
+            openSIPSJS?.mergeCall(roomId)
+        },
+        holdCall (callId: string, automatic?: boolean) {
+            openSIPSJS?.holdCall(callId, automatic)
+        },
+        unholdCall (callId: string) {
+            openSIPSJS?.unholdCall(callId)
+        },
+        async moveCall (callId: string, roomId: number) {
+            await openSIPSJS?.moveCall(callId, roomId)
+        },
+        muteCaller (callId: string) {
+            openSIPSJS?.muteCaller(callId)
+        },
+        unmuteCaller (callId: string) {
+            openSIPSJS?.unmuteCaller(callId)
         },
         setMuteWhenJoin (state: boolean) {
             openSIPSJS?.setMuteWhenJoin(state)
         },
-        muteCaller (callId: string, state: boolean) {
-            openSIPSJS?.muteCaller(callId, state)
-        },
         setDND (state: boolean) {
             openSIPSJS?.setDND(state)
-        },
-        callTerminate (callId: string) {
-            openSIPSJS?.callTerminate(callId)
-        },
-        callTransfer (callId: string, target: string) {
-            openSIPSJS?.callTransfer(callId, target)
-        },
-        callMerge (roomId: number) {
-            openSIPSJS?.callMerge(roomId)
-        },
-        doCallHold ({ callId, toHold, automatic }: DoCallHoldParamsType) {
-            const parameters: DoCallHoldParamsType = {
-                callId,
-                toHold
-            }
-
-            if (automatic !== undefined) {
-                parameters.automatic = automatic
-            }
-
-            openSIPSJS?.doCallHold(parameters)
-        },
-        callAnswer (callId: string) {
-            openSIPSJS?.callAnswer(callId)
-        },
-        async callMove (callId: string, roomId: number) {
-            await openSIPSJS?.callMove(callId, roomId)
-        },
-        msrpAnswer (callId: string) {
-            openSIPSJS?.msrpAnswer(callId)
-        },
-        messageTerminate (callId: string) {
-            openSIPSJS?.messageTerminate(callId)
-        },
-        doCall (target: string, addToCurrentRoom = false) {
-            openSIPSJS?.doCall({
-                target,
-                addToCurrentRoom
-            })
-        },
-        sendMSRP (msrpSessionId: string, body: string) {
-            openSIPSJS?.sendMSRP(msrpSessionId, body)
-        },
-        initMSRP (target: string, body: string, options: object) {
-            openSIPSJS?.initMSRP(target, body, options)
         },
         async setMicrophone (deviceId: string) {
             await openSIPSJS?.setMicrophone(deviceId)
@@ -265,12 +250,12 @@ export const vsipAPI: VsipAPI = {
         sendDTMF (callId: string, value: string) {
             openSIPSJS?.sendDTMF(callId, value)
         },
-        async setCurrentActiveRoomId (roomId: number | undefined) {
-            await openSIPSJS?.setCurrentActiveRoomId(roomId)
+        async setActiveRoom (roomId: number | undefined) {
+            await openSIPSJS?.setActiveRoom(roomId)
         },
-        setMicrophoneInputLevel (value: number) {
+        setMicrophoneSensitivity (value: number) {
             microphoneInputLevel.value = value
-            openSIPSJS?.setMicrophoneInputLevel(value)
+            openSIPSJS?.setMicrophoneSensitivity(value)
         },
         setSpeakerVolume (value: number) {
             speakerVolume.value = value
@@ -280,5 +265,17 @@ export const vsipAPI: VsipAPI = {
             autoAnswer.value = value
             openSIPSJS?.setAutoAnswer(value)
         },
+        msrpAnswer (callId: string) {
+            openSIPSJS?.msrpAnswer(callId)
+        },
+        messageTerminate (callId: string) {
+            openSIPSJS?.messageTerminate(callId)
+        },
+        sendMSRP (msrpSessionId: string, body: string) {
+            openSIPSJS?.sendMSRP(msrpSessionId, body)
+        },
+        initMSRP (target: string, body: string, options: object) {
+            openSIPSJS?.initMSRP(target, body, options)
+        }
     }
 }
