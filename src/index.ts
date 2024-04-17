@@ -25,3 +25,5 @@ export function useVsipInject () {
 
     return vsipAPI
 }
+
+export { vsipAPI } from '@/core'
