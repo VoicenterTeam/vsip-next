@@ -27,3 +27,7 @@ export function useVsipInject () {
 }
 
 export { vsipAPI } from '@/core'
+export type { VsipAPI } from '@/types'
+export type * from '@voicenter-team/opensips-js/src/types/rtc'
+export type * from '@voicenter-team/opensips-js/src/types/timer'
+export type * from '@voicenter-team/opensips-js/src/types/listeners'

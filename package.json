@@ -1,11 +1,10 @@
 {
   "name": "@voicenter-team/vsip-next",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "",
   "keywords": [],
   "scripts": {
     "dev": "vite",
-    "ts-build": "vue-tsc --declaration --emitDeclarationOnly && vite build",
     "build": "vite build",
     "build:documentation": "cd docs && yarn && yarn run build",
     "ts-check": "vue-tsc --noEmit",
@@ -40,8 +39,8 @@
     "eslint-plugin-standard": "5.0.0",
     "eslint-plugin-vue": "9.18.1",
     "typescript": "5.3.2",
-    "vite": "5.0.2",
-    "vite-plugin-dts": "3.6.3",
+    "vite": "5.0.12",
+    "vite-plugin-dts": "3.7.2",
     "vite-plugin-inspect": "0.7.42",
     "vue-tsc": "1.8.22"
   },
