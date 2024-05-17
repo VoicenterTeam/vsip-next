@@ -19,7 +19,10 @@ export default ({ mode }) => {
             vue(),
             dts({
                 rollupTypes: true,
-                copyDtsFiles: true
+                copyDtsFiles: true,
+                bundledPackages: [
+                    '@voicenter-team/opensips-js'
+                ]
             }),
         ],
         build: {
