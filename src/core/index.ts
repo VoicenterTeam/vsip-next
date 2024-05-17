@@ -128,6 +128,7 @@ export const vsipAPI: VsipAPI = {
                         extraHeaders: [ 'X-Bar: bar' ],
                         pcConfig: {},
                     },
+                    modules: [ 'audio' ]
                 })
 
                 /* openSIPSJS Listeners */
@@ -200,82 +201,82 @@ export const vsipAPI: VsipAPI = {
             }
         },
         initCall (target: string, addToCurrentRoom = false) {
-            openSIPSJS?.initCall(target, addToCurrentRoom)
+            openSIPSJS?.audio.initCall(target, addToCurrentRoom)
         },
         answerCall (callId: string) {
-            openSIPSJS?.answerCall(callId)
+            openSIPSJS?.audio.answerCall(callId)
         },
         terminateCall (callId: string) {
-            openSIPSJS?.terminateCall(callId)
+            openSIPSJS?.audio.terminateCall(callId)
         },
         mute () {
-            openSIPSJS?.mute()
+            openSIPSJS?.audio.mute()
         },
         unmute () {
-            openSIPSJS?.unmute()
+            openSIPSJS?.audio.unmute()
         },
         transferCall (callId: string, target: string) {
-            openSIPSJS?.transferCall(callId, target)
+            openSIPSJS?.audio.transferCall(callId, target)
         },
         mergeCall (roomId: number) {
-            openSIPSJS?.mergeCall(roomId)
+            openSIPSJS?.audio.mergeCall(roomId)
         },
         holdCall (callId: string, automatic?: boolean) {
-            openSIPSJS?.holdCall(callId, automatic)
+            openSIPSJS?.audio.holdCall(callId, automatic)
         },
         unholdCall (callId: string) {
-            openSIPSJS?.unholdCall(callId)
+            openSIPSJS?.audio.unholdCall(callId)
         },
         async moveCall (callId: string, roomId: number) {
-            await openSIPSJS?.moveCall(callId, roomId)
+            await openSIPSJS?.audio.moveCall(callId, roomId)
         },
         muteCaller (callId: string) {
-            openSIPSJS?.muteCaller(callId)
+            openSIPSJS?.audio.muteCaller(callId)
         },
         unmuteCaller (callId: string) {
-            openSIPSJS?.unmuteCaller(callId)
+            openSIPSJS?.audio.unmuteCaller(callId)
         },
         setMuteWhenJoin (state: boolean) {
-            openSIPSJS?.setMuteWhenJoin(state)
+            openSIPSJS?.audio.setMuteWhenJoin(state)
         },
         setDND (state: boolean) {
-            openSIPSJS?.setDND(state)
+            openSIPSJS?.audio.setDND(state)
         },
         async setMicrophone (deviceId: string) {
-            await openSIPSJS?.setMicrophone(deviceId)
+            await openSIPSJS?.audio.setMicrophone(deviceId)
         },
         async setSpeaker (deviceId: string) {
-            await openSIPSJS?.setSpeaker(deviceId)
+            await openSIPSJS?.audio.setSpeaker(deviceId)
         },
         sendDTMF (callId: string, value: string) {
-            openSIPSJS?.sendDTMF(callId, value)
+            openSIPSJS?.audio.sendDTMF(callId, value)
         },
         async setActiveRoom (roomId: number | undefined) {
-            await openSIPSJS?.setActiveRoom(roomId)
+            await openSIPSJS?.audio.setActiveRoom(roomId)
         },
         setMicrophoneSensitivity (value: number) {
             microphoneInputLevel.value = value
-            openSIPSJS?.setMicrophoneSensitivity(value)
+            openSIPSJS?.audio.setMicrophoneSensitivity(value)
         },
         setSpeakerVolume (value: number) {
             speakerVolume.value = value
-            openSIPSJS?.setSpeakerVolume(value)
+            openSIPSJS?.audio.setSpeakerVolume(value)
         },
         setAutoAnswer (value: boolean) {
             autoAnswer.value = value
-            openSIPSJS?.setAutoAnswer(value)
+            openSIPSJS?.audio.setAutoAnswer(value)
         },
         msrpAnswer (callId: string) {
-            openSIPSJS?.msrpAnswer(callId)
+            openSIPSJS?.audio.msrpAnswer(callId)
         },
         messageTerminate (callId: string) {
-            openSIPSJS?.messageTerminate(callId)
+            openSIPSJS?.audio.messageTerminate(callId)
         },
         sendMSRP (msrpSessionId: string, body: string) {
-            openSIPSJS?.sendMSRP(msrpSessionId, body)
+            openSIPSJS?.audio.sendMSRP(msrpSessionId, body)
         },
         initMSRP (target: string, body: string, options: object) {
-            openSIPSJS?.initMSRP(target, body, options)
+            openSIPSJS?.audio.initMSRP(target, body, options)
         }
     }
 }

@@ -144,6 +144,7 @@
                 <ul>
                     <li v-for="(call, index) in getActiveCallsInRoom(room.roomId)" :key="index" class="p-2">
 
+                        <b>{{ callTime[call._id]?.formatted }}</b>
                         <b>{{ call._remote_identity }}</b>
 
                         <VcButton
@@ -234,7 +235,8 @@ const {
     activeCalls,
     callsInActiveRoom,
     currentActiveRoomId,
-    activeRooms
+    activeRooms,
+    callTime
 } = state
 
 const {
