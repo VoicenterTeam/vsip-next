@@ -267,16 +267,16 @@ export const vsipAPI: VsipAPI = {
             openSIPSJS?.audio.setAutoAnswer(value)
         },
         msrpAnswer (callId: string) {
-            openSIPSJS?.audio.msrpAnswer(callId)
+            openSIPSJS?.msrp.msrpAnswer(callId)
         },
         messageTerminate (callId: string) {
-            openSIPSJS?.audio.messageTerminate(callId)
+            openSIPSJS?.msrp.messageTerminate(callId)
         },
         sendMSRP (msrpSessionId: string, body: string) {
-            openSIPSJS?.audio.sendMSRP(msrpSessionId, body)
+            openSIPSJS?.msrp.sendMSRP(msrpSessionId, body)
         },
         initMSRP (target: string, body: string, options: object) {
-            openSIPSJS?.audio.initMSRP(target, body, options)
+            openSIPSJS?.msrp.initMSRP(target, body, options)
         }
     }
 }
