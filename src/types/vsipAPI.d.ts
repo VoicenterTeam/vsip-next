@@ -37,8 +37,12 @@ export interface VsipAPIState {
     callMetrics: Ref<{ [key: string]: unknown }>
 }
 
+interface PNExtraHeaders {
+    [key: string]: string
+}
+
 export interface VsipAPIActions {
-    init(domain: string, username: string, password: string): void
+    init(domain: string, username: string, password: string, pnExtraHeaders: PNExtraHeaders): void
     muteCaller: (callId: string) => void
     unmuteCaller: (callId: string) => void
     mute: () => void
