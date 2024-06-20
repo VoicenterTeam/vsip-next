@@ -129,7 +129,7 @@ export const vsipAPI: VsipAPI = {
                         pcConfig: {},
                     },
                     modules: [ 'audio' ],
-                    pnExtraHeaders: pnExtraHeaders
+                    pnExtraHeaders
                 })
 
                 /* openSIPSJS Listeners */
