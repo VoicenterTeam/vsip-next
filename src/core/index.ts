@@ -113,7 +113,7 @@ export const vsipAPI: VsipAPI = {
         speakerVolume: speakerVolume,
     },
     actions: {
-        init (domain, username, password) {
+        init (domain, username, password, pnExtraHeaders) {
             try {
                 openSIPSJS = new OpenSIPSJS({
                     configuration: {
@@ -128,7 +128,8 @@ export const vsipAPI: VsipAPI = {
                         extraHeaders: [ 'X-Bar: bar' ],
                         pcConfig: {},
                     },
-                    modules: [ 'audio' ]
+                    modules: [ 'audio' ],
+                    pnExtraHeaders: pnExtraHeaders
                 })
 
                 /* openSIPSJS Listeners */
