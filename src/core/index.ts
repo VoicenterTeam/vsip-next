@@ -201,6 +201,9 @@ export const vsipAPI: VsipAPI = {
                 console.error(e)
             }
         },
+        unregister () {
+            openSIPSJS?.unregister()
+        },
         initCall (target: string, addToCurrentRoom = false) {
             openSIPSJS?.audio.initCall(target, addToCurrentRoom)
         },

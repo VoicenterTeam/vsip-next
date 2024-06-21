@@ -43,6 +43,7 @@ interface PNExtraHeaders {
 
 export interface VsipAPIActions {
     init(domain: string, username: string, password: string, pnExtraHeaders: PNExtraHeaders): void
+    unregister: () => void
     muteCaller: (callId: string) => void
     unmuteCaller: (callId: string) => void
     mute: () => void
