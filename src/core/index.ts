@@ -113,15 +113,16 @@ export const vsipAPI: VsipAPI = {
         speakerVolume: speakerVolume,
     },
     actions: {
-        init (domain, username, password, pnExtraHeaders) {
+        init (domain, username, password, pnExtraHeaders, socketInterfaces) {
             try {
+                socketInterfaces = socketInterfaces || [ `wss://${domain}` ]
                 openSIPSJS = new OpenSIPSJS({
                     configuration: {
                         session_timers: false,
                         uri: `sip:${username}@${domain}`,
                         password: password
                     },
-                    socketInterfaces: [ `wss://${domain}` ],
+                    socketInterfaces,
                     sipDomain: `${domain}`,
                     sipOptions: {
                         session_timers: false,
