@@ -84,7 +84,6 @@ watch(currentActiveRoomId, async (newValue) => {
     await vsipAPI.actions.setActiveRoom(newValue)
 })
 
-
 export const vsipAPI: VsipAPI = {
     state: {
         isInitialized: isInitialized,
@@ -197,6 +196,8 @@ export const vsipAPI: VsipAPI = {
                         callMetrics.value = { ...data }
                     })
                     .begin()
+
+                return openSIPSJS
             } catch (e) {
                 console.error(e)
             }
