@@ -526,10 +526,10 @@
   dependencies:
     "@voicenter-team/eslint-config-ts" "1.0.21"
 
-"@voicenter-team/opensips-js@^1.0.81":
-  version "1.0.81"
-  resolved "https://registry.yarnpkg.com/@voicenter-team/opensips-js/-/opensips-js-1.0.81.tgz#8c0d864b70057ded20f3fbafd67019a8dd2393ff"
-  integrity sha512-t9HP3giBVsyYeeRWlZ13b0KECAZ5MHMsNd+mwvEkZ6j+Pn7X12zFkSVpAN9Rwwjer6Ke6bwpJpYMbSpd9opt3Q==
+"@voicenter-team/opensips-js@^1.0.85":
+  version "1.0.85"
+  resolved "https://registry.yarnpkg.com/@voicenter-team/opensips-js/-/opensips-js-1.0.85.tgz#6019a5743cb9b313aeda9df28825f765c3dd10de"
+  integrity sha512-x5xprS6WYwkNpDgbcKE8Lf879tTTiI0eOTKjFDTfYX7vtwyIy64RrP/i8kyoePHJaqirKIHzQNUzXVSE3NOp1g==
   dependencies:
     "@types/mime" "^3.0.1"
     generate-unique-id "^2.0.1"
@@ -538,6 +538,7 @@
     mime "^3.0.0"
     p-iteration "^1.1.8"
     sdp-transform "2.14.1"
+    uuid "^10.0.0"
 
 "@volar/language-core@1.10.10", "@volar/language-core@~1.10.5":
   version "1.10.10"
@@ -2690,6 +2691,11 @@ util-deprecate@^1.0.2:
   version "1.0.2"
   resolved "https://registry.npmjs.org/util-deprecate/-/util-deprecate-1.0.2.tgz"
   integrity sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==
+
+uuid@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-10.0.0.tgz#5a95aa454e6e002725c79055fd42aaba30ca6294"
+  integrity sha512-8XkAphELsDnEGrDxUOHB3RGvXz6TeuYSGEZBOjtTtPm2lwhGBjLgOzLHB63IUWfBpNucQjND6d3AOudO+H3RWQ==
 
 validator@^13.7.0:
   version "13.9.0"
