@@ -50,16 +50,19 @@ const {
 } = state
 
 const {
-  doCall,
+  initCall,
   sendDTMF,
   muteCaller,
-  callTerminate,
-  callTransfer,
-  callMerge,
-  doCallHold,
-  callAnswer,
-  callMove,
-  doMute
+  unmuteCaller,
+  terminateCall,
+  transferCall,
+  mergeCall,
+  holdCall,
+  unholdCall,
+  answerCall,
+  moveCall,
+  mute,
+  unmute
 } = actions
 
 /* Other code */
@@ -109,6 +112,7 @@ const {
 | unmute | () => void | Unmute ourself |
 | transferCall | (callId: string, target: string) => void | Transfer call |
 | mergeCall | (roomId: number) => void | Merge calls in room (works only when 2 call in room) |
+| mergeCallByIds | (firstCallId: string, secondCallId: string) => void | Merge calls by their ids |
 | holdCall | (callId: string, automatic?: boolean) => void | Hold a call |
 | unholdCall | (callId: string) => void | Unhold a call |
 | moveCall | (callId: string, roomId: number) => Promise\<void> | Move call to another room |
