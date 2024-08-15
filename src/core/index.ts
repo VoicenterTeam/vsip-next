@@ -226,6 +226,9 @@ export const vsipAPI: VsipAPI = {
         mergeCall (roomId: number) {
             openSIPSJS?.audio.mergeCall(roomId)
         },
+        mergeCallByIds (firstCallId: string, secondCallId: string) {
+            openSIPSJS?.audio.mergeCallByIds(firstCallId, secondCallId)
+        },
         holdCall (callId: string, automatic?: boolean) {
             openSIPSJS?.audio.holdCall(callId, automatic)
         },

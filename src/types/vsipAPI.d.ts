@@ -54,6 +54,7 @@ export interface VsipAPIActions {
     terminateCall: (callId: string) => void
     transferCall: (callId: string, target: string) => void
     mergeCall: (roomId: number) => void
+    mergeCallByIds: (firstCallId: string, secondCallId: string) => void
     holdCall: (callId: string, automatic?: boolean) => void
     unholdCall: (callId: string) => void
     answerCall: (callId: string) => void
