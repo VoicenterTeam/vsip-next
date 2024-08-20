@@ -2,7 +2,7 @@ import type { Ref, ComputedRef } from 'vue'
 import { ICallStatus, ICall, IRoom } from '@voicenter-team/opensips-js/src/types/rtc'
 import { ITimeData } from '@voicenter-team/opensips-js/src/types/timer'
 import { MSRPMessage, IMessage } from '@voicenter-team/opensips-js/src/types/msrp'
-import OpenSIPSJS from "@voicenter-team/opensips-js";
+import OpenSIPSJS from '@voicenter-team/opensips-js'
 
 export interface VsipAPI {
     state: VsipAPIState
@@ -43,7 +43,7 @@ interface PNExtraHeaders {
 }
 
 export interface VsipAPIActions {
-    init(domain: string, username: string, password: string, pnExtraHeaders?: PNExtraHeaders): OpenSIPSJS | undefined
+    init(domain: string, username: string, password: string, pnExtraHeaders?: PNExtraHeaders): Promise<OpenSIPSJS | undefined>
     unregister: () => void
     muteCaller: (callId: string) => void
     unmuteCaller: (callId: string) => void

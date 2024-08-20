@@ -113,94 +113,100 @@ export const vsipAPI: VsipAPI = {
     },
     actions: {
         init (domain, username, password, pnExtraHeaders) {
-            try {
-                openSIPSJS = new OpenSIPSJS({
-                    configuration: {
-                        session_timers: false,
-                        uri: `sip:${username}@${domain}`,
-                        password: password
-                    },
-                    socketInterfaces: [ `wss://${domain}` ],
-                    sipDomain: `${domain}`,
-                    sipOptions: {
-                        session_timers: false,
-                        extraHeaders: [ 'X-Bar: bar' ],
-                        pcConfig: {},
-                    },
-                    modules: [ 'audio' ],
-                    pnExtraHeaders
-                })
+            return new Promise(
+                (resolve, reject) => {
+                    try {
+                        openSIPSJS = new OpenSIPSJS({
+                            configuration: {
+                                session_timers: false,
+                                uri: `sip:${username}@${domain}`,
+                                password: password
+                            },
+                            socketInterfaces: [ `wss://${domain}` ],
+                            sipDomain: `${domain}`,
+                            sipOptions: {
+                                session_timers: false,
+                                extraHeaders: [ 'X-Bar: bar' ],
+                                pcConfig: {},
+                            },
+                            modules: [ 'audio' ],
+                            pnExtraHeaders
+                        })
 
-                /* openSIPSJS Listeners */
-                openSIPSJS
-                    .on('ready', () => {
-                        addCallToCurrentRoom.value = false
-                        isInitialized.value = true
-                    })
-                    .on('changeActiveCalls', (sessions) => {
-                        console.log('changeActiveCalls', sessions)
-                        activeCalls.value = { ...sessions }
-                    })
-                    .on('changeActiveMessages', (sessions) => {
-                        activeMessages.value = { ...sessions as { [key: string]: IMessage } }
-                    })
-                    .on('newMSRPMessage', (data) => {
-                        const sessionId = data.session._id
-                        const sessionMessages = msrpHistory.value[sessionId] || []
-                        sessionMessages.push(data.message)
-                        msrpHistory.value[sessionId] = [ ...sessionMessages ]
-                    })
-                    .on('callAddingInProgressChanged', (value) => {
-                        callAddingInProgress.value = value
-                    })
-                    .on('changeAvailableDeviceList', (devices) => {
-                        availableMediaDevices.value = [ ...devices ]
-                    })
-                    .on('changeActiveInputMediaDevice', (data) => {
-                        selectedInputDevice.value = data
-                    })
-                    .on('changeActiveOutputMediaDevice', (data) => {
-                        selectedOutputDevice.value = data
-                    })
-                    .on('changeMuteWhenJoin', (value) => {
-                        muteWhenJoin.value = value
-                    })
-                    .on('changeIsDND', (value) => {
-                        isDND.value = value
-                    })
-                    .on('changeIsMuted', (value) => {
-                        isMuted.value = value
-                    })
-                    .on('changeActiveStream', (value) => {
-                        originalStream.value = value
-                    })
-                    .on('currentActiveRoomChanged', (id) => {
-                        currentActiveRoomId.value = id
-                    })
-                    .on('addRoom', ({ roomList }) => {
-                        activeRooms.value = { ...roomList }
-                    })
-                    .on('updateRoom', ({ roomList }) => {
-                        activeRooms.value = { ...roomList }
-                    })
-                    .on('removeRoom', ({ roomList }) => {
-                        activeRooms.value = { ...roomList }
-                    })
-                    .on('changeCallStatus', (data) => {
-                        callStatus.value = { ...data }
-                    })
-                    .on('changeCallTime', (data) => {
-                        callTime.value = { ...data }
-                    })
-                    .on('changeCallMetrics', (data) => {
-                        callMetrics.value = { ...data }
-                    })
-                    .begin()
+                        /* openSIPSJS Listeners */
+                        openSIPSJS
+                            .on('ready', () => {
+                                addCallToCurrentRoom.value = false
+                                isInitialized.value = true
 
-                return openSIPSJS
-            } catch (e) {
-                console.error(e)
-            }
+                                resolve(openSIPSJS)
+                            })
+                            .on('changeActiveCalls', (sessions) => {
+                                console.log('changeActiveCalls', sessions)
+                                activeCalls.value = { ...sessions }
+                            })
+                            .on('changeActiveMessages', (sessions) => {
+                                activeMessages.value = { ...sessions as { [key: string]: IMessage } }
+                            })
+                            .on('newMSRPMessage', (data) => {
+                                const sessionId = data.session._id
+                                const sessionMessages = msrpHistory.value[sessionId] || []
+                                sessionMessages.push(data.message)
+                                msrpHistory.value[sessionId] = [ ...sessionMessages ]
+                            })
+                            .on('callAddingInProgressChanged', (value) => {
+                                callAddingInProgress.value = value
+                            })
+                            .on('changeAvailableDeviceList', (devices) => {
+                                availableMediaDevices.value = [ ...devices ]
+                            })
+                            .on('changeActiveInputMediaDevice', (data) => {
+                                selectedInputDevice.value = data
+                            })
+                            .on('changeActiveOutputMediaDevice', (data) => {
+                                selectedOutputDevice.value = data
+                            })
+                            .on('changeMuteWhenJoin', (value) => {
+                                muteWhenJoin.value = value
+                            })
+                            .on('changeIsDND', (value) => {
+                                isDND.value = value
+                            })
+                            .on('changeIsMuted', (value) => {
+                                isMuted.value = value
+                            })
+                            .on('changeActiveStream', (value) => {
+                                originalStream.value = value
+                            })
+                            .on('currentActiveRoomChanged', (id) => {
+                                currentActiveRoomId.value = id
+                            })
+                            .on('addRoom', ({ roomList }) => {
+                                activeRooms.value = { ...roomList }
+                            })
+                            .on('updateRoom', ({ roomList }) => {
+                                activeRooms.value = { ...roomList }
+                            })
+                            .on('removeRoom', ({ roomList }) => {
+                                activeRooms.value = { ...roomList }
+                            })
+                            .on('changeCallStatus', (data) => {
+                                callStatus.value = { ...data }
+                            })
+                            .on('changeCallTime', (data) => {
+                                callTime.value = { ...data }
+                            })
+                            .on('changeCallMetrics', (data) => {
+                                callMetrics.value = { ...data }
+                            })
+                            .begin()
+                    } catch (e) {
+                        console.error(e)
+
+                        reject()
+                    }
+                }
+            )
         },
         unregister () {
             openSIPSJS?.unregister()
