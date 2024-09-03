@@ -5,7 +5,7 @@
         :rules="rules"
         @submit="login"
     >
-        <div class="w-1/3">
+        <div class="w-full">
             <VcFormItem
                 prop="extension"
                 required
@@ -63,7 +63,7 @@ import { ref } from 'vue'
 import { useVsipInject } from '@/index'
 import { VcForm } from '@voicenter-team/voicenter-ui-plus'
 
-const { actions, state } = useVsipInject()
+const { actions } = useVsipInject()
 
 const loginFormRef = ref<typeof VcForm>()
 
@@ -76,23 +76,33 @@ const loginData = ref({
 const message = ref<string>('')
 const rules = {
     extension: [
-        { required: true, message: 'Extension is required' }
+        {
+            required: true,
+            message: 'Extension is required'
+        }
     ],
     password: [
-        { required: true, message: 'Password is required' }
+        {
+            required: true,
+            message: 'Password is required'
+        }
     ],
     domain: [
-        { required: true, message: 'Domain is required' }
+        {
+            required: true,
+            message: 'Domain is required'
+        }
     ]
 }
 
 
 
-const login = async (event) => {
+// eslint-disable-next-line
+const login = async (event: any) => {
     event.preventDefault()
 
-    const { isValid } = await loginFormRef.value.validate()
-    if (!isValid) {
+    const resValid = await loginFormRef.value?.validate()
+    if (!resValid?.isValid) {
         return
     }
 

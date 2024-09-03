@@ -14,27 +14,25 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, onMounted, PropType, ref, watch } from 'vue'
+import { nextTick, onMounted, ref, watch } from 'vue'
 import { useVsipInject } from '@/index'
-//import { useVsipInject } from '../../../../library/super.mjs'
-import { ICall, IRoom } from '@voicenter-team/opensips-js/src/types/rtc'
+import type { ICall, IRoom } from '@voicenter-team/opensips-js/src/types/rtc'
 
-const { state, actions } = useVsipInject()
+const { actions } = useVsipInject()
 
-const {
-    moveCall
-} = actions
+const { moveCall } = actions
 
-const props = defineProps({
-    call: {
-        type: Object as PropType<ICall>,
-        required: true
-    },
-    roomsList: {
-        type: Object as PropType<Array<IRoom>>,
-        default: () => ([])
+interface IProps {
+    call: ICall
+    roomsList?: Array<IRoom>
+}
+
+const props = withDefaults(
+    defineProps<IProps>(),
+    {
+        roomsList: () => []
     }
-})
+)
 
 const activeCallRoomId = ref<number | undefined>()
 const isFirstRender = ref<boolean>(true)
@@ -43,7 +41,7 @@ watch(activeCallRoomId, (newV, oldV) => {
     if (newV === oldV || isFirstRender.value) {
         return
     }
-    moveCall(props.call._id, newV)
+    moveCall(props.call._id, newV ?? 0)
 })
 
 onMounted(() => {

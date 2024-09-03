@@ -1,5 +1,0 @@
-# Example
-
-<ClientOnly>
-    <ProviderWrapper />
-</ClientOnly>

@@ -9,6 +9,7 @@ module.exports = {
     },
     ignorePatterns: [
         'src/vendors/*',
-        'scripts/*'
+        'scripts/*',
+        'docs'
     ]
 }

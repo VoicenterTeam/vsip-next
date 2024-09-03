@@ -1,4 +1,11 @@
-# Docs
+---
+title: Getting started
+description: This library is a wrapper over the opensips-js implementation.
+navigation:
+  title: Getting Started
+---
+
+# Getting started
 
 ## Description
 This library is a wrapper over the opensips-js implementation.
@@ -7,7 +14,7 @@ Call `useVsipProvide` on the top level of Vue components and then use `useVsipIn
 
 ## Basic Usage
 *ProviderWrapper.vue*
-```vue
+```vue [ProviderWrapper.vue]
 <template>
   <div ref="wrapper">
     <VSipPhone v-if="state.isInitialized" />
@@ -24,7 +31,7 @@ actions.init('wss07.voicenter.co', '', '')
 </script>
 ```
 *VSipPhone.vue*
-```vue
+```vue [VSipPhone.vue]
 <template>
     ...
 </template>

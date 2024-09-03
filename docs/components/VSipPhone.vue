@@ -1,6 +1,6 @@
 <template>
     <div>
-        <section class="xs:w-full sm:w-1/2 lg:w-1/3 pb-4">
+        <section class="w-full pb-4">
             <div>
                 <span>Microphone</span>
                 <VcSelect
@@ -29,7 +29,7 @@
             </VcCheckbox>
         </section>
 
-        <section class="xs:w-full sm:w-1/2 lg:w-1/3 pb-4">
+        <section class="xs:w-full sm:w-1/2 pb-4">
             <VcButton
                 color="primary"
                 :disabled="muteButtonDisabled"
@@ -39,7 +39,7 @@
             </VcButton>
         </section>
 
-        <section class="xs:w-full sm:w-1/2 lg:w-1/3 pb-4">
+        <section class="w-full  pb-4">
             <VcForm
                 @submit="onPhoneInputSubmit"
             >
@@ -70,7 +70,7 @@
             <div v-if="callAddingInProgress">Calling...</div>
         </section>
 
-        <section class="xs:w-full sm:w-1/2 lg:w-1/3 pb-4">
+        <section class="w-full  pb-4">
             <div>
                 <span>Microphone sensitivity</span>
                 <VcSlider
@@ -92,7 +92,7 @@
             </div>
         </section>
 
-        <section class="xs:w-full sm:w-1/2 lg:w-1/3 pb-4">
+        <section class="w-full pb-4">
             <VcForm
                 @submit="onDtmfInputSubmit"
             >
@@ -117,13 +117,13 @@
             </VcForm>
         </section>
 
-        <section class="xs:w-full sm:w-1/2 lg:w-1/3 pb-4">
+        <section class="w-full pb-4">
             <span>
                 Active calls: {{ Object.keys(activeCalls).length }}
             </span>
             <div>
                 <span>Your room:</span>
-                <div class="w-36">
+                <div class="w-full">
                     <VcSelect
                         v-model="currentActiveRoomId"
                         :options="roomsListOptions"
@@ -157,7 +157,7 @@
 
                         <VcButton
                             class="ml-2"
-                            color="destructive-actions"
+                            color="destructive"
                             @click="terminateCall(call._id)"
                         >
                             Hangup
@@ -207,18 +207,15 @@
                     </li>
                 </ul>
             </div>
-
         </section>
-
     </div>
 </template>
 
 <script setup lang="ts">
-import { ICall, IRoom } from '@voicenter-team/opensips-js/src/types/rtc'
+import type { ICall, IRoom } from '@voicenter-team/opensips-js/src/types/rtc'
 import CallMoveSelect from './CallMoveSelect.vue'
 import { useVsipInject } from '@/index'
-//import { useVsipInject } from '../../../../library/super.mjs'
-import { computed, ref } from "vue"
+import { computed, ref } from 'vue'
 import { CONSTRAINTS } from '../enum'
 
 const { state, actions } = useVsipInject()
@@ -305,7 +302,8 @@ const roomsListOptions = computed(() => {
 
 /* Methods */
 
-const onPhoneInputSubmit = (event) => {
+// eslint-disable-next-line
+const onPhoneInputSubmit = (event: any) => {
     event.preventDefault()
 
     if (callAddingInProgress.value) {
@@ -315,8 +313,8 @@ const onPhoneInputSubmit = (event) => {
     initCall(targetInput.value, addCallToCurrentRoom.value)
     targetInput.value = ''
 }
-
-const onDtmfInputSubmit = (event) => {
+// eslint-disable-next-line
+const onDtmfInputSubmit = (event: any) => {
     event.preventDefault()
 
     if (callsInActiveRoom.value.length !== 1) {
@@ -335,7 +333,7 @@ const doCallTransfer = (callId: string) => {
     const target = prompt('Please enter target:')
 
     if (target !== null || target !== '') {
-        transferCall(callId, target)
+        transferCall(callId, target || '')
     }
 }
 
@@ -370,7 +368,3 @@ const isHoldButtonDisable = (call: ICall) => {
 }
 
 </script>
-
-<style lang="scss" scoped>
-
-</style>
