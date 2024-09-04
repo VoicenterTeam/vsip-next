@@ -15,6 +15,7 @@ export default defineNuxtConfig({
     },
     css: [
         // join(currentDirLocal, 'assets/css/main.css'),
+        '@voicenter-team/voicenter-ui-plus/library/style.css',
         './assets/css/tailwind.css'
     ],
     alias: {
