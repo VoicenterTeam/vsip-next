@@ -3,18 +3,38 @@ import { resolve } from 'path'
 
 export default defineNuxtConfig({
     devtools: { enabled: true },
+    app: {
+        head: {
+            meta: [
+                {
+                    name: 'theme-color',
+                    content: '#e31515'
+                },
+                {
+                    name: 'apple-mobile-web-app-capable',
+                    content: 'yes'
+                },
+                {
+                    name: 'apple-mobile-web-app-status-bar-style',
+                    content: '#e31515'
+                }
+            ],
+            link: [
+                {
+                    rel: 'icon',
+                    href: '/favicon.ico'
+                }
+            ]
+        }
+    },
     extends: [
         [ 'github:VoicenterTeam/documentation-template', { install: true } ]
     ],
-    routeRules: {
-        '/': { prerender: true }
-    },
     uiTypedoc: {
         typesGenerate: true,
         entryPoints: [ resolve(__dirname, '../library/index.d.ts') ]
     },
     css: [
-        // join(currentDirLocal, 'assets/css/main.css'),
         '@voicenter-team/voicenter-ui-plus/library/style.css',
         './assets/css/tailwind.css'
     ],

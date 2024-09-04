@@ -33,6 +33,3 @@ const isInitialized = computed(() => {
 
 </script>
 
-<style lang="scss">
-</style>
-

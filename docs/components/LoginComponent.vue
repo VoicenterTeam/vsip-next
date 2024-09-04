@@ -61,7 +61,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { useVsipInject } from '@/index'
-import { VcForm } from '@voicenter-team/voicenter-ui-plus'
+import { VcForm, VcFormItem, VcButton, VcInput } from '@voicenter-team/voicenter-ui-plus'
 
 const { actions } = useVsipInject()
 

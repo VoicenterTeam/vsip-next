@@ -1719,7 +1719,7 @@
   resolved "https://registry.yarnpkg.com/@trysound/sax/-/sax-0.2.0.tgz#cccaab758af56761eb7bf37af6f03f326dd798ad"
   integrity sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==
 
-"@types/debug@^4.0.0":
+"@types/debug@^4.0.0", "@types/debug@^4.1.7":
   version "4.1.12"
   resolved "https://registry.yarnpkg.com/@types/debug/-/debug-4.1.12.tgz#a155f21690871953410df4b6b6f53187f0500917"
   integrity sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ==
@@ -1738,6 +1738,11 @@
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-1.0.5.tgz#a6ce3e556e00fd9895dd872dd172ad0d4bd687f4"
   integrity sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==
+
+"@types/events@^3.0.0":
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/@types/events/-/events-3.0.3.tgz#a8ef894305af28d1fc6d2dfdfc98e899591ea529"
+  integrity sha512-trOc4AAUThEz9hapPtSd7wf5tiQKvTtu5b371UxXdTuqzIh0ArcRspRP0i0Viu+LXstIQ1z96t1nsPxT9ol01g==
 
 "@types/hast@^3.0.0", "@types/hast@^3.0.4":
   version "3.0.4"
@@ -1776,6 +1781,11 @@
   integrity sha512-kGaNbPh1k7AFzgpud/gMdvIm5xuECykRR+JnWKQno9TAXVa6WIVCGTPvYGekIDL4uwCZQSYbUxNBSb1aUo79oA==
   dependencies:
     "@types/unist" "*"
+
+"@types/mime@^3.0.1":
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/@types/mime/-/mime-3.0.4.tgz#2198ac274de6017b44d941e00261d5bc6a0e0a45"
+  integrity sha512-iJt33IQnVRkqeqC7PzBHPTC6fDlRNRW8vjrgqtScAhrmMwe8c4Eo7+fUGTa+XdWrpEgpyKWMYmi2dIwMAYRzPw==
 
 "@types/ms@*":
   version "0.7.34"
@@ -2071,10 +2081,24 @@
   dependencies:
     "@voicenter-team/eslint-config-ts" "1.0.24"
 
-"@voicenter-team/voicenter-ui-plus@^0.5.18":
-  version "0.5.18"
-  resolved "https://registry.yarnpkg.com/@voicenter-team/voicenter-ui-plus/-/voicenter-ui-plus-0.5.18.tgz#34885caf64648de866f67c7bfbb9ffd0068b7e14"
-  integrity sha512-vmWXTeXIcnF76qdt+a0iAC+5YfZn1N5bL3PpOkM6uCqOxj/ZpuXA+B+JKuG9aXCyc7y7nE5lQ448zD/CHaw9jA==
+"@voicenter-team/opensips-js@^1.0.91":
+  version "1.0.91"
+  resolved "https://registry.yarnpkg.com/@voicenter-team/opensips-js/-/opensips-js-1.0.91.tgz#178ca1d4dd3c7cc362c4be2f3e90d3425cc1eb2e"
+  integrity sha512-LyKi6xNabA1sqsatdIK87LySJWos1X2Azzyl811fBDtd2AQYbL6/ODbjtsXNnmV4ogZ2Sf0LpIG728s5DR4iyg==
+  dependencies:
+    "@types/mime" "^3.0.1"
+    generate-unique-id "^2.0.1"
+    jssip "3.10.0"
+    loglevel "^1.8.1"
+    mime "^3.0.0"
+    p-iteration "^1.1.8"
+    sdp-transform "2.14.1"
+    uuid "^10.0.0"
+
+"@voicenter-team/voicenter-ui-plus@^0.5.20":
+  version "0.5.20"
+  resolved "https://registry.yarnpkg.com/@voicenter-team/voicenter-ui-plus/-/voicenter-ui-plus-0.5.20.tgz#9624321fa3dfa54f087e610b5cd1d89115fc85f5"
+  integrity sha512-HM52FvWp1WZ8oJQtE21D3sfa6gNdb0bEYWHm0sEGrygaBMbU50zf1DZ3owWC6EXNLrgpx46BhSxGPcYRtrm+5Q==
   dependencies:
     "@vuepic/vue-datepicker" "3.0.0"
     date-fns "^2.29.2"
@@ -4238,6 +4262,11 @@ gauge@^3.0.0:
     strip-ansi "^6.0.1"
     wide-align "^1.1.2"
 
+generate-unique-id@^2.0.1:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/generate-unique-id/-/generate-unique-id-2.0.3.tgz#8ffe6cc867ea4d098638ffd3f1643e8558562d3f"
+  integrity sha512-oADhkjv6nsiHNJNa+kCe/h6vqgooEPmASHU40hWGbhDODb/xKp5ej7l+7BNs3bQ/v8DCbaVJ42//kN2umQfr6A==
+
 gensync@^1.0.0-beta.2:
   version "1.0.0-beta.2"
   resolved "https://registry.yarnpkg.com/gensync/-/gensync-1.0.0-beta.2.tgz#32a6ee76c3d7f52d46b2b1ae5d93fea8580a25e0"
@@ -5047,6 +5076,17 @@ jsonpath-plus@^7.0.0:
   resolved "https://registry.yarnpkg.com/jsonpath-plus/-/jsonpath-plus-7.2.0.tgz#7ad94e147b3ed42f7939c315d2b9ce490c5a3899"
   integrity sha512-zBfiUPM5nD0YZSBT/o/fbCUlCcepMIdP0CJZxM1+KgA4f2T206f6VAg9e7mX35+KlMaIc5qXW34f3BnwJ3w+RA==
 
+jssip@3.10.0:
+  version "3.10.0"
+  resolved "https://registry.yarnpkg.com/jssip/-/jssip-3.10.0.tgz#ed61e189c756e5974adfdb212b3e0e3e74ac1e7a"
+  integrity sha512-iJj+bhnNl0S296sUDc2ZjIbAetnelzZ92aWARyW01oKZ0X8t+5aGrYfJdMFliLFm8hxMcnkep3vmSRGe/yRjsA==
+  dependencies:
+    "@types/debug" "^4.1.7"
+    "@types/events" "^3.0.0"
+    debug "^4.3.1"
+    events "^3.3.0"
+    sdp-transform "^2.14.1"
+
 keygrip@~1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/keygrip/-/keygrip-1.1.0.tgz#871b1681d5e159c62a445b0c74b615e0917e7226"
@@ -5285,6 +5325,11 @@ lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.21:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
+
+loglevel@^1.8.1:
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/loglevel/-/loglevel-1.9.1.tgz#d63976ac9bcd03c7c873116d41c2a85bafff1be7"
+  integrity sha512-hP3I3kCrDIMuRwAwHltphhDM1r8i55H33GgqjXbrisuJhF4kRhW1dNuxsRklp4bXl8DSdLaNLuiL4A/LWRfxvg==
 
 longest-streak@^3.0.0:
   version "3.1.0"
@@ -6391,6 +6436,11 @@ optionator@^0.9.3:
     type-check "^0.4.0"
     word-wrap "^1.2.5"
 
+p-iteration@^1.1.8:
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/p-iteration/-/p-iteration-1.1.8.tgz#14df726d55af368beba81bcc92a26bb1b48e714a"
+  integrity sha512-IMFBSDIYcPNnW7uWYGrBqmvTiq7W0uB0fJn6shQZs7dlF3OvrHOre+JT9ikSZ7gZS3vWqclVgoQSvToJrns7uQ==
+
 p-limit@^2.2.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/p-limit/-/p-limit-2.3.0.tgz#3dd33c647a214fdfffd835933eb086da0dc21db1"
@@ -7386,6 +7436,16 @@ scule@^1.2.0, scule@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/scule/-/scule-1.3.0.tgz#6efbd22fd0bb801bdcc585c89266a7d2daa8fbd3"
   integrity sha512-6FtHJEvt+pVMIB9IBY+IcCJ6Z5f1iQnytgyfKMhDKgmzYG+TeH/wx1y3l27rshSbLiSanrR9ffZDrEsmjlQF2g==
+
+sdp-transform@2.14.1:
+  version "2.14.1"
+  resolved "https://registry.yarnpkg.com/sdp-transform/-/sdp-transform-2.14.1.tgz#2bb443583d478dee217df4caa284c46b870d5827"
+  integrity sha512-RjZyX3nVwJyCuTo5tGPx+PZWkDMCg7oOLpSlhjDdZfwUoNqG1mM8nyj31IGHyaPWXhjbP7cdK3qZ2bmkJ1GzRw==
+
+sdp-transform@^2.14.1:
+  version "2.14.2"
+  resolved "https://registry.yarnpkg.com/sdp-transform/-/sdp-transform-2.14.2.tgz#d2cee6a1f7abe44e6332ac6cbb94e8600f32d813"
+  integrity sha512-icY6jVao7MfKCieyo1AyxFYm1baiM+fA00qW/KrNNVlkxHAd34riEKuEkUe4bBb3gJwLJZM+xT60Yj1QL8rHiA==
 
 "semver@2 || 3 || 4 || 5":
   version "5.7.2"
@@ -8432,6 +8492,11 @@ util-deprecate@^1.0.1, util-deprecate@^1.0.2, util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==
+
+uuid@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-10.0.0.tgz#5a95aa454e6e002725c79055fd42aaba30ca6294"
+  integrity sha512-8XkAphELsDnEGrDxUOHB3RGvXz6TeuYSGEZBOjtTtPm2lwhGBjLgOzLHB63IUWfBpNucQjND6d3AOudO+H3RWQ==
 
 validate-npm-package-license@^3.0.1:
   version "3.0.4"
