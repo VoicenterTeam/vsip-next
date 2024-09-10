@@ -7,6 +7,19 @@
     >
         <div class="w-full">
             <VcFormItem
+                prop="extraHeaders"
+                required
+                :error="message"
+            >
+                <VcInput
+                    v-model="loginData.extraHeaders"
+                    name="extraHeaders"
+                    type="text"
+                    prefix-icon="vc-icon-extensions text-primary-actions"
+                    placeholder="Extra Headers"
+                />
+            </VcFormItem>
+            <VcFormItem
                 prop="extension"
                 required
                 :error="message"
@@ -68,6 +81,7 @@ const { actions } = useVsipInject()
 const loginFormRef = ref<typeof VcForm>()
 
 const loginData = ref({
+    extraHeaders: '',
     extension: '',
     password: '',
     domain: ''
@@ -75,6 +89,11 @@ const loginData = ref({
 
 const message = ref<string>('')
 const rules = {
+    extraHeaders: [
+        {
+            required: false
+        }
+    ],
     extension: [
         {
             required: true,
@@ -106,10 +125,30 @@ const login = async (event: any) => {
         return
     }
 
+    const pnParams = loginData.value.extraHeaders.split(';').reduce(
+        (acc, item) => {
+            if (typeof item !== 'string') {
+                return acc
+            }
+
+            const [ key, value ] = item.split('=')
+
+            if (typeof key !== 'string' || typeof value !== 'string') {
+                return acc
+            }
+
+            acc[key] = value
+
+            return acc
+        },
+        {}
+    )
+
     actions.init(
         loginData.value.domain,
         loginData.value.extension,
-        loginData.value.password
+        loginData.value.password,
+        pnParams
     )
 }
 

@@ -135,7 +135,7 @@ export const vsipAPI: VsipAPI = {
 
                         /* openSIPSJS Listeners */
                         openSIPSJS
-                            .on('ready', () => {
+                            .on('connection', () => {
                                 addCallToCurrentRoom.value = false
                                 isInitialized.value = true
 
