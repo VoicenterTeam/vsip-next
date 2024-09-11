@@ -130,7 +130,9 @@ const app = initializeApp(firebaseConfig);
 let token: string
 
 async function requestNotificationPermission() {
-    const messaging = getMessaging();
+    const messaging = getMessaging(app);
+
+    window.messaging = messaging
 
     try {
         // Request notification permission
