@@ -218,6 +218,50 @@ import { useVsipInject } from '@/index'
 import { computed, ref } from 'vue'
 import { CONSTRAINTS } from '~/enum'
 
+import { initializeApp } from 'firebase/app';
+import { getMessaging, getToken } from "firebase/messaging";
+
+const firebaseConfig = window.firebaseConfig
+
+//const parsed = window.firebaseConfig
+
+const VAPID_KEY = window.VAPID_KEY
+
+const app = initializeApp(firebaseConfig);
+
+//const messaging = getMessaging();
+
+let token: string
+
+async function requestNotificationPermission() {
+    const messaging = getMessaging();
+
+    try {
+        // Request notification permission
+        const permission = await Notification.requestPermission();
+
+        if (permission === 'granted') {
+            console.log('Notification permission granted.');
+
+            // Get the FCM token
+            token = await getToken(messaging, { vapidKey: VAPID_KEY });
+
+            if (token) {
+                console.log('FCM Token:', token);
+                // Use the token for sending notifications from your server
+            } else {
+                console.log('No registration token available. Request permission to generate one.');
+            }
+        } else {
+            console.log('Notification permission denied.');
+        }
+    } catch (error) {
+        console.error('An error occurred while requesting permission:', error);
+    }
+}
+
+requestNotificationPermission()
+
 const { state, actions } = useVsipInject()
 const {
     selectedInputDevice,

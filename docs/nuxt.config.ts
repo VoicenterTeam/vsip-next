@@ -3,6 +3,9 @@ import { resolve } from 'path'
 
 export default defineNuxtConfig({
     devtools: { enabled: true },
+    devServer: {
+        https: true
+    },
     app: {
         head: {
             meta: [
