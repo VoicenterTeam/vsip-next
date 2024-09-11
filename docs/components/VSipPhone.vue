@@ -37,6 +37,13 @@
             >
                 {{ muteButtonText }}
             </VcButton>
+
+            <VcButton
+                color="primary"
+                @click="register"
+            >
+                REGISTER
+            </VcButton>
         </section>
 
         <section class="w-full  pb-4">
@@ -221,11 +228,11 @@ import { CONSTRAINTS } from '~/enum'
 import { getMessaging, onMessage } from "firebase/messaging";
 
 //const messaging = getMessaging();
-onMessage(window.messaging, (payload) => {
+/*onMessage(window.messaging, (payload) => {
     console.log('Message received. ', payload);
 
     register()
-});
+});*/
 
 /*import { initializeApp } from 'firebase/app';
 import { getMessaging, getToken } from "firebase/messaging";
