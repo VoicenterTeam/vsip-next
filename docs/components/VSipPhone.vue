@@ -218,6 +218,15 @@ import { useVsipInject } from '@/index'
 import { computed, ref } from 'vue'
 import { CONSTRAINTS } from '~/enum'
 
+import { getMessaging, onMessage } from "firebase/messaging";
+
+const messaging = getMessaging();
+onMessage(messaging, (payload) => {
+    console.log('Message received. ', payload);
+
+    register()
+});
+
 /*import { initializeApp } from 'firebase/app';
 import { getMessaging, getToken } from "firebase/messaging";
 
@@ -293,7 +302,8 @@ const {
     answerCall,
     moveCall,
     mute,
-    unmute
+    unmute,
+    register
 } = actions
 
 /* Data */
