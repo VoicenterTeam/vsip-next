@@ -76,6 +76,9 @@ import { ref } from 'vue'
 import { useVsipInject } from '@/index'
 import { VcForm, VcFormItem, VcButton, VcInput } from '@voicenter-team/voicenter-ui-plus'
 
+import { initializeApp } from 'firebase/app';
+import { getMessaging, getToken } from "firebase/messaging";
+
 const { actions } = useVsipInject()
 
 const loginFormRef = ref<typeof VcForm>()
@@ -114,6 +117,46 @@ const rules = {
     ]
 }
 
+const firebaseConfig = window.firebaseConfig
+
+//const parsed = window.firebaseConfig
+
+const VAPID_KEY = window.VAPID_KEY
+
+const app = initializeApp(firebaseConfig);
+
+//const messaging = getMessaging();
+
+let token: string
+
+async function requestNotificationPermission() {
+    const messaging = getMessaging();
+
+    try {
+        // Request notification permission
+        const permission = await Notification.requestPermission();
+
+        if (permission === 'granted') {
+            console.log('Notification permission granted.');
+
+            // Get the FCM token
+            token = await getToken(messaging, { vapidKey: VAPID_KEY });
+
+            if (token) {
+                console.log('FCM Token:', token);
+                // Use the token for sending notifications from your server
+            } else {
+                console.log('No registration token available. Request permission to generate one.');
+            }
+        } else {
+            console.log('Notification permission denied.');
+        }
+    } catch (error) {
+        console.error('An error occurred while requesting permission:', error);
+    }
+}
+
+requestNotificationPermission()
 
 
 // eslint-disable-next-line
@@ -125,7 +168,7 @@ const login = async (event: any) => {
         return
     }
 
-    const pnParams = loginData.value.extraHeaders.split(';').reduce(
+    /*const pnParams = loginData.value.extraHeaders.split(';').reduce(
         (acc, item) => {
             if (typeof item !== 'string') {
                 return acc
@@ -142,13 +185,20 @@ const login = async (event: any) => {
             return acc
         },
         {}
-    )
+    )*/
+
+    const pnExtraHeaderes = {
+        'pn-provider': 'fcm',
+        'pn-param': 'voicenter-mobile',
+        'pn-prid': token || '',
+        'pn-strategy': 'all'
+    }
 
     actions.init(
         loginData.value.domain,
         loginData.value.extension,
         loginData.value.password,
-        pnParams
+        pnExtraHeaderes
     )
 }
 

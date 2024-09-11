@@ -218,7 +218,7 @@ import { useVsipInject } from '@/index'
 import { computed, ref } from 'vue'
 import { CONSTRAINTS } from '~/enum'
 
-import { initializeApp } from 'firebase/app';
+/*import { initializeApp } from 'firebase/app';
 import { getMessaging, getToken } from "firebase/messaging";
 
 const firebaseConfig = window.firebaseConfig
@@ -260,7 +260,7 @@ async function requestNotificationPermission() {
     }
 }
 
-requestNotificationPermission()
+requestNotificationPermission()*/
 
 const { state, actions } = useVsipInject()
 const {
