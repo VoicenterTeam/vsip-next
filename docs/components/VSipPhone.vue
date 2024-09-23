@@ -38,12 +38,12 @@
                 {{ muteButtonText }}
             </VcButton>
 
-            <VcButton
+<!--            <VcButton
                 color="primary"
                 @click="register"
             >
                 REGISTER
-            </VcButton>
+            </VcButton>-->
         </section>
 
         <section class="w-full  pb-4">
