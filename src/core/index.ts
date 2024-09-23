@@ -200,6 +200,8 @@ export const vsipAPI: VsipAPI = {
                                 callMetrics.value = { ...data }
                             })
                             .begin()
+
+                        resolve(openSIPSJS)
                     } catch (e) {
                         console.error(e)
 
@@ -213,6 +215,9 @@ export const vsipAPI: VsipAPI = {
         },
         register () {
             openSIPSJS?.register()
+        },
+        disconnect () {
+            openSIPSJS?.disconnect()
         },
         initCall (target: string, addToCurrentRoom = false) {
             openSIPSJS?.audio.initCall(target, addToCurrentRoom)
