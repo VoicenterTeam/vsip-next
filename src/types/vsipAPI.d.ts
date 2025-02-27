@@ -63,7 +63,7 @@ export interface VsipAPIActions {
     moveCall: (callId: string, roomId: number) => Promise<void>
     msrpAnswer: (callId: string) => void
     messageTerminate: (callId: string) => void
-    initCall: (target: string, addToCurrentRoom: boolean) => void
+    initCall: (target: string, addToCurrentRoom: boolean, holdOtherCalls = false) => void
     sendMSRP: (msrpSessionId: string, body: string) => void
     initMSRP: (target: string, body: string, options: object) => void
     setMicrophone: (deviceId: string) => Promise<void>
