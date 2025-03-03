@@ -660,10 +660,10 @@
   dependencies:
     "@voicenter-team/eslint-config-ts" "1.0.21"
 
-"@voicenter-team/opensips-js@^1.0.126":
-  version "1.0.126"
-  resolved "https://registry.yarnpkg.com/@voicenter-team/opensips-js/-/opensips-js-1.0.126.tgz#fd6a4509f0bc92c333163da4c2f4db03fa70fa92"
-  integrity sha512-9pP3cHAZnPr8ALt9UKays5qSiyjsyp3c6cKtVe13BqusFWDulJ9K31oSZnI0PCMJdmNGqKKmpjHmn9F3U+PGSg==
+"@voicenter-team/opensips-js@^1.0.127":
+  version "1.0.127"
+  resolved "https://registry.yarnpkg.com/@voicenter-team/opensips-js/-/opensips-js-1.0.127.tgz#d3714a8db7dc01561114d1e03388f002c7d57e37"
+  integrity sha512-13ywRQaMXaCT/hFL8yq7cY4EHjbO5DEsGy33Qr+SE5c3EfWAvWCvBSd1eyvPUhTaQiVWkmdqmKXUYqMICP+QWQ==
   dependencies:
     "@mediapipe/selfie_segmentation" "^0.1.1675465747"
     "@tensorflow-models/body-segmentation" "^1.0.2"
