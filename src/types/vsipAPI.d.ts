@@ -13,6 +13,8 @@ export type MediaDeviceOption = Omit<MediaDeviceInfo, 'toJSON'>
 
 export interface VsipAPIState {
     isInitialized: Ref<boolean>
+    isOpenSIPSReady: Ref<boolean>
+    isOpenSIPSReconnecting: Ref<boolean>
     activeCalls: Ref<{ [key: string]: ICall }>
     callsInActiveRoom: ComputedRef<Array<ICall>>
     activeMessages: Ref<{ [key: string]: IMessage }>

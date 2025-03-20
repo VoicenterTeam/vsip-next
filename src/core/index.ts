@@ -9,6 +9,8 @@ import { VsipAPI } from '@/types'
 let openSIPSJS: OpenSIPSJS | undefined = undefined
 
 const isInitialized = ref<boolean>(false)
+const isOpenSIPSReady = ref<boolean>(false)
+const isOpenSIPSReconnecting = ref<boolean>(false)
 const activeCalls = ref<{ [key: string]: ICall }>({})
 const activeMessages = ref<{ [key: string]: IMessage }>({})
 const addCallToCurrentRoom = ref<boolean>(false)
@@ -87,6 +89,8 @@ watch(currentActiveRoomId, async (newValue) => {
 export const vsipAPI: VsipAPI = {
     state: {
         isInitialized: isInitialized,
+        isOpenSIPSReady: isOpenSIPSReady,
+        isOpenSIPSReconnecting: isOpenSIPSReconnecting,
         activeCalls: activeCalls,
         callsInActiveRoom,
         activeMessages: activeMessages,
@@ -135,11 +139,15 @@ export const vsipAPI: VsipAPI = {
 
                         /* openSIPSJS Listeners */
                         openSIPSJS
-                            .on('connection', () => {
+                            .on('connection', (value) => {
                                 addCallToCurrentRoom.value = false
                                 isInitialized.value = true
+                                isOpenSIPSReady.value = value
 
                                 resolve(openSIPSJS)
+                            })
+                            .on('reconnecting', (value) => {
+                                isOpenSIPSReconnecting.value = value
                             })
                             .on('changeActiveCalls', (sessions) => {
                                 console.log('changeActiveCalls', sessions)
