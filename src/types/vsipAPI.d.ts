@@ -1,8 +1,7 @@
 import type { Ref, ComputedRef } from 'vue'
-import { ICallStatus, ICall, IRoom } from '@voicenter-team/opensips-js/src/types/rtc'
+import { ICallStatus, ICall, IRoom, IOpenSIPSConfiguration } from '@voicenter-team/opensips-js/src/types/rtc'
 import { ITimeData } from '@voicenter-team/opensips-js/src/types/timer'
 import { MSRPMessage, IMessage } from '@voicenter-team/opensips-js/src/types/msrp'
-import { IOpenSIPSConfiguration } from '@voicenter-team/opensips-js'
 
 export interface VsipAPI {
     state: VsipAPIState
