@@ -76,8 +76,8 @@ import { ref } from 'vue'
 import { useVsipInject } from '@/index'
 import { VcForm, VcFormItem, VcButton, VcInput } from '@voicenter-team/voicenter-ui-plus'
 
-import { initializeApp } from 'firebase/app';
-import { getMessaging, getToken } from "firebase/messaging";
+import { initializeApp } from 'firebase/app'
+import { getMessaging, getToken } from 'firebase/messaging'
 
 const { actions } = useVsipInject()
 
@@ -117,44 +117,44 @@ const rules = {
     ]
 }
 
-const firebaseConfig = window.firebaseConfig
+const firebaseConfig = window.firebaseConfig || {}
 
 //const parsed = window.firebaseConfig
 
 const VAPID_KEY = window.VAPID_KEY
 
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig)
 
 //const messaging = getMessaging();
 
 let token: string
 
-async function requestNotificationPermission() {
-    const messaging = getMessaging(app);
+async function requestNotificationPermission () {
+    const messaging = getMessaging(app)
 
     window.messaging = messaging
 
     try {
         // Request notification permission
-        const permission = await Notification.requestPermission();
+        const permission = await Notification.requestPermission()
 
         if (permission === 'granted') {
-            console.log('Notification permission granted.');
+            console.log('Notification permission granted.')
 
             // Get the FCM token
-            token = await getToken(messaging, { vapidKey: VAPID_KEY });
+            token = await getToken(messaging, { vapidKey: VAPID_KEY })
 
             if (token) {
-                console.log('FCM Token:', token);
+                console.log('FCM Token:', token)
                 // Use the token for sending notifications from your server
             } else {
-                console.log('No registration token available. Request permission to generate one.');
+                console.log('No registration token available. Request permission to generate one.')
             }
         } else {
-            console.log('Notification permission denied.');
+            console.log('Notification permission denied.')
         }
     } catch (error) {
-        console.error('An error occurred while requesting permission:', error);
+        console.error('An error occurred while requesting permission:', error)
     }
 }
 
@@ -200,7 +200,10 @@ const login = async (event: any) => {
         loginData.value.domain,
         loginData.value.extension,
         loginData.value.password,
-        pnExtraHeaderes
+        pnExtraHeaderes,
+        {
+            register_expires: 38
+        }
     )
 }
 
