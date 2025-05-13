@@ -22,6 +22,8 @@ const selectedOutputDevice = ref<string>('default')
 const selectedInputDevice = ref<string>('default')
 const muteWhenJoin = ref<boolean>(false)
 const isDND = ref<boolean>(false)
+// If false - all incoming calls will be rejected when busy
+const isCallWaitingEnabled = ref<boolean>(true)
 const isMuted = ref<boolean>(false)
 const originalStream = ref<MediaStream | null>(null)
 const currentActiveRoomId = ref<number | undefined>(undefined)
@@ -74,6 +76,10 @@ watch(isDND, (newValue) => {
     vsipAPI.actions.setDND(newValue)
 })
 
+watch(isCallWaitingEnabled, (newValue) => {
+    vsipAPI.actions.setCallWaiting(newValue)
+})
+
 watch(microphoneInputLevel, (newValue) => {
     vsipAPI.actions.setMicrophoneSensitivity(newValue)
 })
@@ -105,6 +111,7 @@ export const vsipAPI: VsipAPI = {
         selectedInputDevice: selectedInputDevice,
         muteWhenJoin: muteWhenJoin,
         isDND: isDND,
+        isCallWaitingEnabled: isCallWaitingEnabled,
         isMuted: isMuted,
         originalStream: originalStream,
         currentActiveRoomId: currentActiveRoomId,
@@ -177,6 +184,9 @@ export const vsipAPI: VsipAPI = {
                             })
                             .on('changeMuteWhenJoin', (value) => {
                                 muteWhenJoin.value = value
+                            })
+                            .on('changeIsCallWaiting', (value) => {
+                                isCallWaitingEnabled.value = value
                             })
                             .on('changeIsDND', (value) => {
                                 isDND.value = value
@@ -272,6 +282,9 @@ export const vsipAPI: VsipAPI = {
         },
         setDND (state: boolean) {
             openSIPSJS?.audio.setDND(state)
+        },
+        setCallWaiting (state: boolean) {
+            openSIPSJS?.audio.setCallWaiting(state)
         },
         async setMicrophone (deviceId: string) {
             await openSIPSJS?.audio.setMicrophone(deviceId)

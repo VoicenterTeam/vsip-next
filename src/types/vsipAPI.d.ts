@@ -28,6 +28,7 @@ export interface VsipAPIState {
     selectedInputDevice: Ref<string>
     muteWhenJoin: Ref<boolean>
     isDND: Ref<boolean>
+    isCallWaitingEnabled: Ref<boolean>
     isMuted: Ref<boolean>
     originalStream: Ref<MediaStream | null>
     currentActiveRoomId: Ref<number | undefined>
@@ -56,6 +57,7 @@ export interface VsipAPIActions {
     unmute: () => void
     setMuteWhenJoin: (state: boolean) => void
     setDND: (state: boolean) => void
+    setCallWaiting: (state: boolean) => void
     terminateCall: (callId: string) => void
     transferCall: (callId: string, target: string) => void
     mergeCall: (roomId: number) => void
