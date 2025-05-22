@@ -3,6 +3,7 @@ import OpenSIPSJS from '@voicenter-team/opensips-js'
 import { ITimeData } from '@voicenter-team/opensips-js/src/types/timer'
 import { ICall, IRoom, ICallStatus } from '@voicenter-team/opensips-js/src/types/rtc'
 import { IMessage, MSRPMessage } from '@voicenter-team/opensips-js/src/types/msrp'
+import { WebrtcMetricsConfigType } from '@voicenter-team/opensips-js/src/types/webrtcmetrics'
 
 import { VsipAPI } from '@/types'
 
@@ -309,6 +310,9 @@ export const vsipAPI: VsipAPI = {
         setAutoAnswer (value: boolean) {
             autoAnswer.value = value
             openSIPSJS?.audio.setAutoAnswer(value)
+        },
+        setMetricsConfig (config: WebrtcMetricsConfigType) {
+            openSIPSJS?.audio.setMetricsConfig(config)
         },
         msrpAnswer (callId: string) {
             openSIPSJS?.msrp.msrpAnswer(callId)

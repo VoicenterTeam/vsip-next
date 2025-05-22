@@ -131,6 +131,7 @@ const {
 | setSpeakerVolume         | (value: number) => void                                                      | Set speaker volume. Value should be in range from 0 to 1         |
 | setAutoAnswer            | (value: boolean) => void                                                     | Set auto-answer                                                  |
 | setDND                   | (state: boolean) => void                                                     | Set 'Do not Disturb' option                                      |
+| setMetricsConfig         | (config: WebrtcMetricsConfigType) => void                                    | Set the metric config (used for audio quality indicator)         |
 | msrpAnswer               | (callId: string) => void                                                     | Answer MSRP invite                                               |
 | messageTerminate         | (callId: string) => void                                                     | Terminate MSRP session                                           |
 | sendMSRP                 | (msrpSessionId: string, body: string) => void                                | Send MSRP message                                                |

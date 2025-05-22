@@ -2,6 +2,7 @@ import type { Ref, ComputedRef } from 'vue'
 import { ICallStatus, ICall, IRoom, IOpenSIPSConfiguration } from '@voicenter-team/opensips-js/src/types/rtc'
 import { ITimeData } from '@voicenter-team/opensips-js/src/types/timer'
 import { MSRPMessage, IMessage } from '@voicenter-team/opensips-js/src/types/msrp'
+import { WebrtcMetricsConfigType } from '@voicenter-team/opensips-js/src/types/webrtcmetrics'
 
 export interface VsipAPI {
     state: VsipAPIState
@@ -78,4 +79,5 @@ export interface VsipAPIActions {
     setMicrophoneSensitivity: (value: number) => void
     setSpeakerVolume: (value: number) => void
     setAutoAnswer: (value: boolean) => void
+    setMetricsConfig: (config: WebrtcMetricsConfigType) => void
 }
