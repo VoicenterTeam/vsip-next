@@ -12,11 +12,11 @@ let openSIPSJS: OpenSIPSJS | undefined = undefined
 const isInitialized = ref<boolean>(false)
 const isOpenSIPSReady = ref<boolean>(false)
 const isOpenSIPSReconnecting = ref<boolean>(false)
-const activeCalls = ref<{ [key: string]: ICall }>({})
+const allCalls = ref<{ [key: string]: ICall }>({})
 const activeMessages = ref<{ [key: string]: IMessage }>({})
 const addCallToCurrentRoom = ref<boolean>(false)
 const callAddingInProgress = ref<string | undefined>(undefined)
-const activeRooms = ref<{ [key: number]: IRoom }>({})
+const allRooms = ref<{ [key: number | string]: IRoom }>({})
 const msrpHistory = ref<{ [key: string]: Array<MSRPMessage> }>({})
 const availableMediaDevices = ref<Array<MediaDeviceInfo>>([])
 const selectedOutputDevice = ref<string>('default')
@@ -34,6 +34,33 @@ const speakerVolume = ref<number>(1) // [0;1]
 const callStatus = ref<{ [key: string]: ICallStatus }>({})
 const callTime = ref<{ [key: string]: ITimeData }>({})
 const callMetrics = ref<{ [key: string]: unknown }>({})
+
+const activeCalls = computed(() => {
+    const calls: { [key: string]: ICall } = {}
+    Object.entries(allCalls.value).forEach(([key, value]) => {
+        if (!callStatus.value[key]?.isTransferred) {
+            calls[key] = value
+        }
+    })
+
+    return calls
+})
+
+const activeRooms = computed(() => {
+    const rooms: { [key: number | string]: IRoom } = {}
+
+    const callRoomIds = Object.values(activeCalls.value).map((call) => {
+        return call.roomId
+    })
+
+    Object.entries(allRooms.value).forEach(([key, value]) => {
+        if (callRoomIds.includes(value.roomId)) {
+            rooms[key] = value
+        }
+    })
+
+    return rooms
+})
 
 const inputMediaDeviceList = computed(() => {
     return availableMediaDevices.value.filter(device => device.kind === 'audioinput').map(device => {
@@ -59,6 +86,12 @@ const outputMediaDeviceList = computed(() => {
 
 const callsInActiveRoom = computed(() => {
     return Object.values(activeCalls.value).filter((call) => call.roomId === currentActiveRoomId.value)
+})
+
+watch(callsInActiveRoom, (value) => {
+    if (!value.length && currentActiveRoomId.value) {
+        currentActiveRoomId.value = undefined
+    }
 })
 
 watch(selectedInputDevice, async (newValue) => {
@@ -159,8 +192,7 @@ export const vsipAPI: VsipAPI = {
                                 isOpenSIPSReconnecting.value = value
                             })
                             .on('changeActiveCalls', (sessions) => {
-                                console.log('changeActiveCalls', sessions)
-                                activeCalls.value = { ...sessions }
+                                allCalls.value = { ...sessions }
                             })
                             .on('changeActiveMessages', (sessions) => {
                                 activeMessages.value = { ...sessions as { [key: string]: IMessage } }
@@ -202,13 +234,13 @@ export const vsipAPI: VsipAPI = {
                                 currentActiveRoomId.value = id
                             })
                             .on('addRoom', ({ roomList }) => {
-                                activeRooms.value = { ...roomList }
+                                allRooms.value = { ...roomList }
                             })
                             .on('updateRoom', ({ roomList }) => {
-                                activeRooms.value = { ...roomList }
+                                allRooms.value = { ...roomList }
                             })
                             .on('removeRoom', ({ roomList }) => {
-                                activeRooms.value = { ...roomList }
+                                allRooms.value = { ...roomList }
                             })
                             .on('changeCallStatus', (data) => {
                                 callStatus.value = { ...data }
