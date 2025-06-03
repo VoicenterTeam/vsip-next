@@ -526,10 +526,10 @@
   dependencies:
     "@voicenter-team/eslint-config-ts" "1.0.21"
 
-"@voicenter-team/opensips-js@^1.0.143":
-  version "1.0.143"
-  resolved "https://registry.yarnpkg.com/@voicenter-team/opensips-js/-/opensips-js-1.0.143.tgz#8c707c9265a648c06a0b49c2500fd2a1a9ae3d5f"
-  integrity sha512-Go1ykKrIDxiOXlwRhaCdafVseutEXLaz96k/mbihJ5JuCF3KFetUtXT/wk/o0uaPmDiZj3/1JU1HuQSySRtXFQ==
+"@voicenter-team/opensips-js@^1.0.146":
+  version "1.0.146"
+  resolved "https://registry.yarnpkg.com/@voicenter-team/opensips-js/-/opensips-js-1.0.146.tgz#2ef99c3150ca908bc653089178e57c0421ae88a1"
+  integrity sha512-J1NCKb4lUgJjcJDpOfpRPsKEGZNk42A2fSyml1lb/DJY5Lv+C0NFIFel+r7b3OYdCAmXPJBX4tPpEDyxSupuYg==
   dependencies:
     "@types/mime" "^3.0.1"
     generate-unique-id "^2.0.1"
