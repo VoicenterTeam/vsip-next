@@ -23,7 +23,7 @@ Call `useVsipProvide` on the top level of Vue components and then use `useVsipIn
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { useVsipProvide } from '@voicenter-team/vsip-next'
+import { useVsipProvide } from 'opensips-js-vue'
 import VSipPhone from '@/VSipPhone.vue'
 
 const { actions, state } = useVsipProvide()

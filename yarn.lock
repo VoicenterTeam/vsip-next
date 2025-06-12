@@ -526,21 +526,6 @@
   dependencies:
     "@voicenter-team/eslint-config-ts" "1.0.21"
 
-"@voicenter-team/opensips-js@^1.0.147":
-  version "1.0.147"
-  resolved "https://registry.yarnpkg.com/@voicenter-team/opensips-js/-/opensips-js-1.0.147.tgz#a90c7a552b61e85b4d0741628b3f67b32f573dc3"
-  integrity sha512-Gu1bmtbtbNRfHxrN02k8+KdDUPmlXQO1QdHLgdIw6C4Nqen45xP1UIBHFloMd0HNwmGdyusDT1fSzfOT8W5u2g==
-  dependencies:
-    "@types/mime" "^3.0.1"
-    generate-unique-id "^2.0.1"
-    jssip "3.10.0"
-    konva "^9.3.16"
-    loglevel "^1.8.1"
-    mime "^3.0.0"
-    p-iteration "^1.1.8"
-    sdp-transform "2.14.1"
-    uuid "^10.0.0"
-
 "@volar/language-core@1.10.10", "@volar/language-core@~1.10.5":
   version "1.10.10"
   resolved "https://registry.npmjs.org/@volar/language-core/-/language-core-1.10.10.tgz"
@@ -2213,6 +2198,21 @@ open@^9.1.0:
     define-lazy-prop "^3.0.0"
     is-inside-container "^1.0.0"
     is-wsl "^2.2.0"
+
+opensips-js@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/opensips-js/-/opensips-js-0.1.1.tgz#2b71d53b39c7f38cb29caf9793cda80465a40ed5"
+  integrity sha512-gLdP4P7zCOEgeRCo6Sc1gt2Tk0FmQddewDbKHPrsmE1PtmXffxHwYBpm3TC91TZLh0z2TAOzhKL1y4HA62TGIQ==
+  dependencies:
+    "@types/mime" "^3.0.1"
+    generate-unique-id "^2.0.1"
+    jssip "3.10.0"
+    konva "^9.3.16"
+    loglevel "^1.8.1"
+    mime "^3.0.0"
+    p-iteration "^1.1.8"
+    sdp-transform "2.14.1"
+    uuid "^10.0.0"
 
 optionator@^0.9.3:
   version "0.9.3"

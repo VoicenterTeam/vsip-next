@@ -2543,20 +2543,6 @@
   dependencies:
     "@voicenter-team/eslint-config-ts" "1.0.24"
 
-"@voicenter-team/opensips-js@^1.0.95":
-  version "1.0.95"
-  resolved "https://registry.yarnpkg.com/@voicenter-team/opensips-js/-/opensips-js-1.0.95.tgz#2a564484116cb4f9b543b576a7a393d5b9e258da"
-  integrity sha512-VS6yYLDGWKM0akRzvACccYjOttDFBlTkpnOgZ32jHeiTqK4SaDPU1E4mlCNxVO1kCc/IGrfVteNgzRzaDmU4ng==
-  dependencies:
-    "@types/mime" "^3.0.1"
-    generate-unique-id "^2.0.1"
-    jssip "3.10.0"
-    loglevel "^1.8.1"
-    mime "^3.0.0"
-    p-iteration "^1.1.8"
-    sdp-transform "2.14.1"
-    uuid "^10.0.0"
-
 "@voicenter-team/voicenter-ui-plus@^0.5.20":
   version "0.5.20"
   resolved "https://registry.yarnpkg.com/@voicenter-team/voicenter-ui-plus/-/voicenter-ui-plus-0.5.20.tgz#9624321fa3dfa54f087e610b5cd1d89115fc85f5"
@@ -5692,6 +5678,11 @@ kolorist@^1.8.0:
   resolved "https://registry.yarnpkg.com/kolorist/-/kolorist-1.8.0.tgz#edddbbbc7894bc13302cdf740af6374d4a04743c"
   integrity sha512-Y+60/zizpJ3HRH8DCss+q95yr6145JXZo46OTpFvDZWLfRCE4qChOyk1b26nMaNpfHHgxagk9dXT5OP0Tfe+dQ==
 
+konva@^9.3.16:
+  version "9.3.20"
+  resolved "https://registry.yarnpkg.com/konva/-/konva-9.3.20.tgz#0920a267284c320c4e6d903202656cf436e37f77"
+  integrity sha512-7XPD/YtgfzC8b1c7z0hhY5TF1IO/pBYNa29zMTA2PeBaqI0n5YplUeo4JRuRcljeAF8lWtW65jePZZF7064c8w==
+
 launch-editor@^2.8.1:
   version "2.8.1"
   resolved "https://registry.yarnpkg.com/launch-editor/-/launch-editor-2.8.1.tgz#3bda72af213ec9b46b170e39661916ec66c2f463"
@@ -6945,6 +6936,21 @@ openapi-typescript@^6.7.6:
     supports-color "^9.4.0"
     undici "^5.28.4"
     yargs-parser "^21.1.1"
+
+opensips-js@^0.1.0:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/opensips-js/-/opensips-js-0.1.1.tgz#2b71d53b39c7f38cb29caf9793cda80465a40ed5"
+  integrity sha512-gLdP4P7zCOEgeRCo6Sc1gt2Tk0FmQddewDbKHPrsmE1PtmXffxHwYBpm3TC91TZLh0z2TAOzhKL1y4HA62TGIQ==
+  dependencies:
+    "@types/mime" "^3.0.1"
+    generate-unique-id "^2.0.1"
+    jssip "3.10.0"
+    konva "^9.3.16"
+    loglevel "^1.8.1"
+    mime "^3.0.0"
+    p-iteration "^1.1.8"
+    sdp-transform "2.14.1"
+    uuid "^10.0.0"
 
 optionator@^0.9.3:
   version "0.9.4"
@@ -8319,7 +8325,16 @@ streamx@^2.15.0, streamx@^2.18.0:
   optionalDependencies:
     bare-events "^2.2.0"
 
-"string-width-cjs@npm:string-width@^4.2.0", "string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
+"string-width-cjs@npm:string-width@^4.2.0":
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
+  integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
+  dependencies:
+    emoji-regex "^8.0.0"
+    is-fullwidth-code-point "^3.0.0"
+    strip-ansi "^6.0.1"
+
+"string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -8359,7 +8374,14 @@ stringify-entities@^4.0.3:
     character-entities-html4 "^2.0.0"
     character-entities-legacy "^3.0.0"
 
-"strip-ansi-cjs@npm:strip-ansi@^6.0.1", strip-ansi@^6.0.0, strip-ansi@^6.0.1:
+"strip-ansi-cjs@npm:strip-ansi@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
+  integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
+  dependencies:
+    ansi-regex "^5.0.1"
+
+strip-ansi@^6.0.0, strip-ansi@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
   integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
@@ -9352,7 +9374,16 @@ word@~0.3.0:
   resolved "https://registry.yarnpkg.com/word/-/word-0.3.0.tgz#8542157e4f8e849f4a363a288992d47612db9961"
   integrity sha512-OELeY0Q61OXpdUfTp+oweA/vtLVg5VDOXh+3he3PNzLGG/y0oylSOC1xRVj0+l4vQ3tj/bB1HVHv1ocXkQceFA==
 
-"wrap-ansi-cjs@npm:wrap-ansi@^7.0.0", wrap-ansi@^7.0.0:
+"wrap-ansi-cjs@npm:wrap-ansi@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
+  integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
+  dependencies:
+    ansi-styles "^4.0.0"
+    string-width "^4.1.0"
+    strip-ansi "^6.0.0"
+
+wrap-ansi@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==

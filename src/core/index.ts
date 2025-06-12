@@ -1,9 +1,9 @@
 import { computed, ref, watch } from 'vue'
-import OpenSIPSJS from '@voicenter-team/opensips-js'
-import { ITimeData } from '@voicenter-team/opensips-js/src/types/timer'
-import { ICall, IRoom, ICallStatus } from '@voicenter-team/opensips-js/src/types/rtc'
-import { IMessage, MSRPMessage } from '@voicenter-team/opensips-js/src/types/msrp'
-import { WebrtcMetricsConfigType } from '@voicenter-team/opensips-js/src/types/webrtcmetrics'
+import OpenSIPSJS from 'opensips-js'
+import { ITimeData } from 'opensips-js/src/types/timer'
+import { ICall, IRoom, ICallStatus } from 'opensips-js/src/types/rtc'
+import { IMessage, MSRPMessage } from 'opensips-js/src/types/msrp'
+import { WebrtcMetricsConfigType } from 'opensips-js/src/types/webrtcmetrics'
 
 import { VsipAPI } from '@/types'
 
@@ -37,7 +37,7 @@ const callMetrics = ref<{ [key: string]: unknown }>({})
 
 const activeCalls = computed(() => {
     const calls: { [key: string]: ICall } = {}
-    Object.entries(allCalls.value).forEach(([key, value]) => {
+    Object.entries(allCalls.value).forEach(([ key, value ]) => {
         if (!callStatus.value[key]?.isTransferred) {
             calls[key] = value
         }
@@ -53,7 +53,7 @@ const activeRooms = computed(() => {
         return call.roomId
     })
 
-    Object.entries(allRooms.value).forEach(([key, value]) => {
+    Object.entries(allRooms.value).forEach(([ key, value ]) => {
         if (callRoomIds.includes(value.roomId)) {
             rooms[key] = value
         }

@@ -219,7 +219,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ICall, IRoom } from '@voicenter-team/opensips-js/src/types/rtc'
+import type { ICall, IRoom } from 'opensips-js/src/types/rtc'
 import CallMoveSelect from './CallMoveSelect.vue'
 import { useVsipInject } from '@/index'
 import { computed, ref } from 'vue'

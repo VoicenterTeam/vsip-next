@@ -21,7 +21,7 @@ export default ({ mode }) => {
                 rollupTypes: true,
                 copyDtsFiles: true,
                 bundledPackages: [
-                    '@voicenter-team/opensips-js'
+                    'opensips-js'
                 ]
             }),
         ],
