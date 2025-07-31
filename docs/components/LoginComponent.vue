@@ -196,10 +196,12 @@ const login = async (event: any) => {
         'pn-strategy': 'all'
     }
 
-    actions.init(
-        loginData.value.domain,
-        loginData.value.extension,
-        loginData.value.password,
+    actions.init({
+            domain: loginData.value.domain,
+            username: loginData.value.extension,
+            modules: ['audio'],
+            password: loginData.value.password
+        },
         pnExtraHeaderes,
         {
             register_expires: 38

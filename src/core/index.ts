@@ -157,7 +157,7 @@ export const vsipAPI: VsipAPI = {
         speakerVolume: speakerVolume,
     },
     actions: {
-        init (domain, username, password, pnExtraHeaders, opensipsConfiguration = {}) {
+        init (connectOptions, pnExtraHeaders, opensipsConfiguration = {}) {
             return new Promise(
                 (resolve, reject) => {
                     try {
@@ -165,17 +165,17 @@ export const vsipAPI: VsipAPI = {
                             configuration: {
                                 ...opensipsConfiguration,
                                 session_timers: false,
-                                uri: `sip:${username}@${domain}`,
-                                password: password,
+                                uri: `sip:${connectOptions.username}@${connectOptions.domain}`,
+                                password: connectOptions.password,
                             },
-                            socketInterfaces: [ `wss://${domain}` ],
-                            sipDomain: `${domain}`,
+                            socketInterfaces: [ `wss://${connectOptions.domain}` ],
+                            sipDomain: `${connectOptions.domain}`,
                             sipOptions: {
                                 session_timers: false,
                                 extraHeaders: [ 'X-Bar: bar' ],
                                 pcConfig: {},
                             },
-                            modules: [ 'audio' ],
+                            modules: connectOptions.modules,
                             pnExtraHeaders
                         })
 

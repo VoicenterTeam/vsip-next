@@ -9,6 +9,14 @@ export interface VsipAPI {
     actions: VsipAPIActions
 }
 
+export interface ConnectOptions {
+    domain: string
+    username: string
+    modules: Array<'audio' | 'video'>
+    password?: string
+    authorization_jwt?: string
+}
+
 export type MediaDeviceOption = Omit<MediaDeviceInfo, 'toJSON'>
 
 export interface VsipAPIState {
@@ -48,7 +56,7 @@ interface PNExtraHeaders {
 export type InitOpensipsConfiguration = Omit<IOpenSIPSConfiguration, 'uri' | 'session_timers' | 'password'>
 
 export interface VsipAPIActions {
-    init(domain: string, username: string, password: string, pnExtraHeaders?: PNExtraHeaders, opensipsConfiguration?: Partial<InitOpensipsConfiguration>): Promise<unknown>
+    init(credentials: ConnectOptions, pnExtraHeaders?: PNExtraHeaders, opensipsConfiguration?: Partial<InitOpensipsConfiguration>): Promise<unknown>
     unregister: () => void
     register: () => void
     disconnect: () => void
