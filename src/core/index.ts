@@ -161,13 +161,19 @@ export const vsipAPI: VsipAPI = {
             return new Promise(
                 (resolve, reject) => {
                     try {
+                        const configuration = {
+                            ...opensipsConfiguration,
+                            session_timers: false,
+                            uri: `sip:${connectOptions.username}@${connectOptions.domain}`,
+                            password: connectOptions.password,
+                        }
+
+                        if (connectOptions.authorization_jwt) {
+                            configuration.authorization_jwt = connectOptions.authorization_jwt
+                        }
+
                         openSIPSJS = new OpenSIPSJS({
-                            configuration: {
-                                ...opensipsConfiguration,
-                                session_timers: false,
-                                uri: `sip:${connectOptions.username}@${connectOptions.domain}`,
-                                password: connectOptions.password,
-                            },
+                            configuration,
                             socketInterfaces: [ `wss://${connectOptions.domain}` ],
                             sipDomain: `${connectOptions.domain}`,
                             sipOptions: {
