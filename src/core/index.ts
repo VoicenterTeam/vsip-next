@@ -157,25 +157,31 @@ export const vsipAPI: VsipAPI = {
         speakerVolume: speakerVolume,
     },
     actions: {
-        init (domain, username, password, pnExtraHeaders, opensipsConfiguration = {}) {
+        init (connectOptions, pnExtraHeaders, opensipsConfiguration = {}) {
             return new Promise(
                 (resolve, reject) => {
                     try {
+                        const configuration = {
+                            ...opensipsConfiguration,
+                            session_timers: false,
+                            uri: `sip:${connectOptions.username}@${connectOptions.domain}`,
+                            password: connectOptions.password,
+                        }
+
+                        if (connectOptions.authorization_jwt) {
+                            configuration.authorization_jwt = connectOptions.authorization_jwt
+                        }
+
                         openSIPSJS = new OpenSIPSJS({
-                            configuration: {
-                                ...opensipsConfiguration,
-                                session_timers: false,
-                                uri: `sip:${username}@${domain}`,
-                                password: password,
-                            },
-                            socketInterfaces: [ `wss://${domain}` ],
-                            sipDomain: `${domain}`,
+                            configuration,
+                            socketInterfaces: [ `wss://${connectOptions.domain}` ],
+                            sipDomain: `${connectOptions.domain}`,
                             sipOptions: {
                                 session_timers: false,
                                 extraHeaders: [ 'X-Bar: bar' ],
                                 pcConfig: {},
                             },
-                            modules: [ 'audio' ],
+                            modules: connectOptions.modules,
                             pnExtraHeaders
                         })
 
