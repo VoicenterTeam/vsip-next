@@ -28,6 +28,7 @@ export function useVsipInject () {
 
 export { vsipAPI } from '@/core'
 export type { VsipAPI } from '@/types'
+export type { OpensipsConnectOptions } from '@/types'
 export type * from 'opensips-js/src/types/rtc'
 export type * from 'opensips-js/src/types/timer'
 export type * from 'opensips-js/src/types/listeners'
