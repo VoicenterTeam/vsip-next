@@ -9,7 +9,7 @@ export interface VsipAPI {
     actions: VsipAPIActions
 }
 
-export interface ConnectOptions {
+export interface OpensipsConnectOptions {
     domain: string
     username: string
     modules: Array<'audio' | 'video'>
@@ -56,7 +56,7 @@ interface PNExtraHeaders {
 export type InitOpensipsConfiguration = Omit<IOpenSIPSConfiguration, 'uri' | 'session_timers' | 'password'>
 
 export interface VsipAPIActions {
-    init(credentials: ConnectOptions, pnExtraHeaders?: PNExtraHeaders, opensipsConfiguration?: Partial<InitOpensipsConfiguration>): Promise<unknown>
+    init(credentials: OpensipsConnectOptions, pnExtraHeaders?: PNExtraHeaders, opensipsConfiguration?: Partial<InitOpensipsConfiguration>): Promise<unknown>
     unregister: () => void
     register: () => void
     disconnect: () => void

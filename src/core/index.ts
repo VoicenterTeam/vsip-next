@@ -158,7 +158,7 @@ export const vsipAPI: VsipAPI = {
     },
     actions: {
         init (connectOptions, pnExtraHeaders, opensipsConfiguration = {}) {
-            return new Promise(
+            return new Promise<OpenSIPSJS>(
                 (resolve, reject) => {
                     try {
                         const configuration = {
