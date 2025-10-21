@@ -28,7 +28,7 @@ export default ({ mode }) => {
         build: {
             outDir: OUTPUT_DIR,
             sourcemap: true,
-            target: 'es6',
+            target: 'es2020',
             commonjsOptions: {
                 esmExternals: true
             },
