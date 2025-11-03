@@ -94,11 +94,15 @@ watch(callsInActiveRoom, (value) => {
     }
 })
 
-watch(selectedInputDevice, async (newValue) => {
+/* watch(selectedInputDevice, async (newValue, oldValue) => {
+    if (newValue === oldValue) return
+
     await vsipAPI.actions.setMicrophone(newValue)
 })
 
-watch(selectedOutputDevice, async (newValue) => {
+watch(selectedOutputDevice, async (newValue, oldValue) => {
+    if (newValue === oldValue) return
+
     await vsipAPI.actions.setSpeaker(newValue)
 })
 
@@ -124,7 +128,7 @@ watch(speakerVolume, (newValue) => {
 
 watch(currentActiveRoomId, async (newValue) => {
     await vsipAPI.actions.setActiveRoom(newValue)
-})
+}) */
 
 export const vsipAPI: VsipAPI = {
     state: {
