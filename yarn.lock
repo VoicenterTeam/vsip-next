@@ -309,10 +309,10 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==
 
-"@ricky0123/vad-web@^0.0.29":
-  version "0.0.29"
-  resolved "https://registry.yarnpkg.com/@ricky0123/vad-web/-/vad-web-0.0.29.tgz#e20ecba917505b9d4f0329fec8210c4ff7cd1dc6"
-  integrity sha512-natq2FfiEdCv2LcXpmA+U5+wz7QoPgOe2QcwcehUIcFSfZrRnJVAC5H4MCL5Z2xOp7QK6nz53y/tyJLWFVx6TA==
+"@ricky0123/vad-web@0.0.28":
+  version "0.0.28"
+  resolved "https://registry.yarnpkg.com/@ricky0123/vad-web/-/vad-web-0.0.28.tgz#eb747a89ce751cf2a022d09117c66172445b4313"
+  integrity sha512-Hvw8jN3r1SBxmjJa89HITxRcwlT6dc7CQPVtVQLrqfY8EeQcx41QeqKUol4lw8ZCeAIHKwYndHnB1K/4SAQJgQ==
   dependencies:
     onnxruntime-web "^1.17.0"
 
@@ -2298,10 +2298,10 @@ open@^9.1.0:
     is-inside-container "^1.0.0"
     is-wsl "^2.2.0"
 
-opensips-js@^0.1.18:
-  version "0.1.18"
-  resolved "https://registry.yarnpkg.com/opensips-js/-/opensips-js-0.1.18.tgz#9bbb9cc8163854918c894d533c3dce949d9d1214"
-  integrity sha512-yWZ0js6YE561UCAruu/6aA9b9gGydaEpsoqrUolhKQFmvIJqYOVUCfPgad0pFiY64TgM5uePBTgyndxNsCGx9Q==
+opensips-js@^0.1.19:
+  version "0.1.19"
+  resolved "https://registry.yarnpkg.com/opensips-js/-/opensips-js-0.1.19.tgz#a04cd322d80c09f623c6f9b924ffeeabb781324f"
+  integrity sha512-otw3ew4Oa9BALW+0b4NygPhYxb+bwMn07yUDDLhrgzt/+D5CA2Fvjjiw7PQy8/sQyM6l1l2x++Ws0+2ZXXyi8w==
   dependencies:
     "@types/mime" "^3.0.1"
     generate-unique-id "^2.0.1"
