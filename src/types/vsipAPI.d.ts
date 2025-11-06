@@ -1,5 +1,5 @@
 import type { Ref, ComputedRef } from 'vue'
-import { ICallStatus, ICall, IRoom, IOpenSIPSConfiguration } from 'opensips-js/src/types/rtc'
+import { ICallStatus, ICall, IRoom, IOpenSIPSConfiguration, NoiseReductionOptions } from 'opensips-js/src/types/rtc'
 import { ITimeData } from 'opensips-js/src/types/timer'
 import { MSRPMessage, IMessage } from 'opensips-js/src/types/msrp'
 import { WebrtcMetricsConfigType } from 'opensips-js/src/types/webrtcmetrics'
@@ -53,7 +53,11 @@ interface PNExtraHeaders {
     [key: string]: string
 }
 
-export type InitOpensipsConfiguration = Omit<IOpenSIPSConfiguration, 'uri' | 'session_timers' | 'password'>
+type NoiseReductionOptionsWithoutVad = Omit<NoiseReductionOptions, 'vadModule'>
+
+export type InitOpensipsConfiguration = Omit<IOpenSIPSConfiguration, 'uri' | 'session_timers' | 'password' | 'noiseReductionOptions'> & {
+    noiseReductionOptions?: NoiseReductionOptionsWithoutVad
+}
 
 export interface VsipAPIActions {
     init(credentials: OpensipsConnectOptions, pnExtraHeaders?: PNExtraHeaders, opensipsConfiguration?: Partial<InitOpensipsConfiguration>): Promise<unknown>
