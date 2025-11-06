@@ -1,9 +1,10 @@
 import { computed, ref, watch } from 'vue'
 import OpenSIPSJS from 'opensips-js'
 import { ITimeData } from 'opensips-js/src/types/timer'
-import { ICall, IRoom, ICallStatus } from 'opensips-js/src/types/rtc'
+import { ICall, IRoom, ICallStatus, IOpenSIPSConfiguration, NoiseReductionOptions } from 'opensips-js/src/types/rtc'
 import { IMessage, MSRPMessage } from 'opensips-js/src/types/msrp'
 import { WebrtcMetricsConfigType } from 'opensips-js/src/types/webrtcmetrics'
+import * as VAD from '@ricky0123/vad-web'
 
 import { VsipAPI } from '@/types'
 
@@ -165,11 +166,23 @@ export const vsipAPI: VsipAPI = {
             return new Promise<OpenSIPSJS>(
                 (resolve, reject) => {
                     try {
-                        const configuration = {
+                        const configuration: IOpenSIPSConfiguration = {
                             ...opensipsConfiguration,
                             session_timers: false,
                             uri: `sip:${connectOptions.username}@${connectOptions.domain}`,
                             password: connectOptions.password,
+                        }
+
+                        if (opensipsConfiguration.noiseReductionOptions) {
+                            configuration.noiseReductionOptions = {
+                                ...opensipsConfiguration.noiseReductionOptions,
+                                vadModule: VAD
+                            } as NoiseReductionOptions
+                        } else {
+                            configuration.noiseReductionOptions = {
+                                mode: 'disabled',
+                                vadModule: VAD
+                            } as NoiseReductionOptions
                         }
 
                         if (connectOptions.authorization_jwt) {
