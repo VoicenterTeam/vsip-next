@@ -1,7 +1,14 @@
 import { computed, ref, watch } from 'vue'
 import OpenSIPSJS from 'opensips-js'
 import { ITimeData } from 'opensips-js/src/types/timer'
-import { ICall, IRoom, ICallStatus, IOpenSIPSConfiguration, NoiseReductionOptions } from 'opensips-js/src/types/rtc'
+import {
+    ICall,
+    IRoom,
+    ICallStatus,
+    IOpenSIPSConfiguration,
+    NoiseReductionOptions,
+    NoiseReductionOptionsWithoutVadModule
+} from 'opensips-js/src/types/rtc'
 import { IMessage, MSRPMessage } from 'opensips-js/src/types/msrp'
 import { WebrtcMetricsConfigType } from 'opensips-js/src/types/webrtcmetrics'
 import * as VAD from '@ricky0123/vad-web'
@@ -368,6 +375,12 @@ export const vsipAPI: VsipAPI = {
         },
         setMetricsConfig (config: WebrtcMetricsConfigType) {
             openSIPSJS?.audio.setMetricsConfig(config)
+        },
+        setVADConfiguration (config: Partial<NoiseReductionOptionsWithoutVadModule>) {
+            openSIPSJS?.audio.setVADConfiguration(config)
+        },
+        getNoiseReductionMode () {
+            return openSIPSJS?.audio.getNoiseReductionMode()
         },
         msrpAnswer (callId: string) {
             openSIPSJS?.msrp.msrpAnswer(callId)

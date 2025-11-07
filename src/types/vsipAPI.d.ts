@@ -1,5 +1,13 @@
 import type { Ref, ComputedRef } from 'vue'
-import { ICallStatus, ICall, IRoom, IOpenSIPSConfiguration, NoiseReductionOptions } from 'opensips-js/src/types/rtc'
+import {
+    ICallStatus,
+    ICall,
+    IRoom,
+    IOpenSIPSConfiguration,
+    NoiseReductionOptions,
+    NoiseReductionOptionsWithoutVadModule,
+    NoiseReductionMode
+} from 'opensips-js/src/types/rtc'
 import { ITimeData } from 'opensips-js/src/types/timer'
 import { MSRPMessage, IMessage } from 'opensips-js/src/types/msrp'
 import { WebrtcMetricsConfigType } from 'opensips-js/src/types/webrtcmetrics'
@@ -53,10 +61,8 @@ interface PNExtraHeaders {
     [key: string]: string
 }
 
-type NoiseReductionOptionsWithoutVad = Omit<NoiseReductionOptions, 'vadModule'>
-
 export type InitOpensipsConfiguration = Omit<IOpenSIPSConfiguration, 'uri' | 'session_timers' | 'password' | 'noiseReductionOptions'> & {
-    noiseReductionOptions?: NoiseReductionOptionsWithoutVad
+    noiseReductionOptions?: NoiseReductionOptionsWithoutVadModule
 }
 
 export interface VsipAPIActions {
@@ -71,6 +77,8 @@ export interface VsipAPIActions {
     setMuteWhenJoin: (state: boolean) => void
     setDND: (state: boolean) => void
     setCallWaiting: (state: boolean) => void
+    setVADConfiguration: (config: Partial<NoiseReductionOptionsWithoutVadModule>) => void
+    getNoiseReductionMode: () => NoiseReductionMode | undefined
     terminateCall: (callId: string) => void
     transferCall: (callId: string, target: string) => void
     mergeCall: (roomId: number) => void
