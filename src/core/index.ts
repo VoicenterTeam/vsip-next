@@ -2,6 +2,7 @@ import { computed, ref, watch } from 'vue'
 import OpenSIPSJS from 'opensips-js'
 import { ITimeData } from 'opensips-js/src/types/timer'
 import {
+    IOpenSIPSJSOptions,
     ICall,
     IRoom,
     ICallStatus,
@@ -196,6 +197,16 @@ export const vsipAPI: VsipAPI = {
                             configuration.authorization_jwt = connectOptions.authorization_jwt
                         }
 
+                        const additionalOptions: Partial<IOpenSIPSJSOptions> = {}
+
+                        if (connectOptions.msrpDomain) {
+                            additionalOptions.msrpDomain = connectOptions.msrpDomain
+                        }
+
+                        if (connectOptions.msrpWs) {
+                            additionalOptions.msrpWs = connectOptions.msrpWs
+                        }
+
                         openSIPSJS = new OpenSIPSJS({
                             configuration,
                             socketInterfaces: [ `wss://${connectOptions.domain}` ],
@@ -206,7 +217,8 @@ export const vsipAPI: VsipAPI = {
                                 pcConfig: {},
                             },
                             modules: connectOptions.modules,
-                            pnExtraHeaders
+                            pnExtraHeaders,
+                            ...additionalOptions
                         })
 
                         /* openSIPSJS Listeners */
