@@ -1,6 +1,6 @@
 {
   "name": "opensips-js-vue",
-  "version": "0.1.16",
+  "version": "0.1.19",
   "description": "",
   "keywords": [],
   "scripts": {
@@ -26,7 +26,7 @@
   "dependencies": {
     "@ricky0123/vad-web": "0.0.28",
     "core-js": "3.8.3",
-    "opensips-js": "^0.1.27",
+    "opensips-js": "^0.1.28",
     "vue": "3.3.8"
   },
   "devDependencies": {
