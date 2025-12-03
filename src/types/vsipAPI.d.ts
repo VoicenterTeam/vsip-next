@@ -19,12 +19,12 @@ export interface VsipAPI {
 
 export interface OpensipsConnectOptions {
     domain: string
-    msrpDomain: string
-    msrpWs: boolean
     username: string
     modules: Array<'audio' | 'video' | 'msrp'>
     password?: string
     authorization_jwt?: string
+    msrpDomain?: string
+    msrpWs?: boolean
 }
 
 export type MediaDeviceOption = Omit<MediaDeviceInfo, 'toJSON'>
