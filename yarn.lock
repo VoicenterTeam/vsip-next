@@ -2298,10 +2298,10 @@ open@^9.1.0:
     is-inside-container "^1.0.0"
     is-wsl "^2.2.0"
 
-opensips-js@^0.1.31:
-  version "0.1.31"
-  resolved "https://registry.yarnpkg.com/opensips-js/-/opensips-js-0.1.31.tgz#6859dbce50ed3243db6063fc0590bef58fd64ef8"
-  integrity sha512-cP85FxyX4upv/PhY9mqnehzrBn3iRuruPjdVPHaAFLVIsHW3iPMK+Z05qcO3WFOemKc73YZnpeM1pMJdqPqzbA==
+opensips-js@^0.1.32:
+  version "0.1.32"
+  resolved "https://registry.yarnpkg.com/opensips-js/-/opensips-js-0.1.32.tgz#4c48c2911e0315d2e7c5b1d959f6c3774664699d"
+  integrity sha512-B/7mrid5noWwTjpNSH4/VUKooG58TJ6XpfMZ8hedTNmj2ADIlOj5T0BISZijscWU/ax4egR1SJT6g2ksjsnc6g==
   dependencies:
     "@types/mime" "^3.0.1"
     generate-unique-id "^2.0.1"
