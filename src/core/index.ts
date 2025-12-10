@@ -6,6 +6,7 @@ import {
     ICall,
     IRoom,
     ICallStatus,
+    CustomLoggerType,
     IOpenSIPSConfiguration,
     NoiseReductionOptions,
     NoiseReductionOptionsWithoutVadModule
@@ -170,7 +171,7 @@ export const vsipAPI: VsipAPI = {
         speakerVolume: speakerVolume,
     },
     actions: {
-        init (connectOptions, pnExtraHeaders, opensipsConfiguration = {}) {
+        init (connectOptions, pnExtraHeaders, opensipsConfiguration = {}, logger?: CustomLoggerType) {
             return new Promise<OpenSIPSJS>(
                 (resolve, reject) => {
                     try {
@@ -219,7 +220,7 @@ export const vsipAPI: VsipAPI = {
                             modules: connectOptions.modules,
                             pnExtraHeaders,
                             ...additionalOptions
-                        })
+                        }, logger)
 
                         /* openSIPSJS Listeners */
                         openSIPSJS
