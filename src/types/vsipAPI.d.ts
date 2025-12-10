@@ -6,7 +6,8 @@ import {
     IOpenSIPSConfiguration,
     NoiseReductionOptions,
     NoiseReductionOptionsWithoutVadModule,
-    NoiseReductionMode
+    NoiseReductionMode,
+    CustomLoggerType
 } from 'opensips-js/src/types/rtc'
 import { ITimeData } from 'opensips-js/src/types/timer'
 import { MSRPMessage, IMessage } from 'opensips-js/src/types/msrp'
@@ -68,7 +69,7 @@ export type InitOpensipsConfiguration = Omit<IOpenSIPSConfiguration, 'uri' | 'se
 }
 
 export interface VsipAPIActions {
-    init(credentials: OpensipsConnectOptions, pnExtraHeaders?: PNExtraHeaders, opensipsConfiguration?: Partial<InitOpensipsConfiguration>): Promise<unknown>
+    init(credentials: OpensipsConnectOptions, pnExtraHeaders?: PNExtraHeaders, opensipsConfiguration?: Partial<InitOpensipsConfiguration>, logger?: CustomLoggerType): Promise<unknown>
     unregister: () => void
     register: () => void
     disconnect: () => void
