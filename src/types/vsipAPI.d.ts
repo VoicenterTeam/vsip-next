@@ -30,6 +30,11 @@ export interface OpensipsConnectOptions {
 
 export type MediaDeviceOption = Omit<MediaDeviceInfo, 'toJSON'>
 
+export interface NoiseReductionState {
+    sessionId: null | string
+    enabled: boolean
+}
+
 export interface VsipAPIState {
     isInitialized: Ref<boolean>
     isOpenSIPSReady: Ref<boolean>
@@ -58,6 +63,7 @@ export interface VsipAPIState {
     callStatus: Ref<{ [key: string]: ICallStatus }>
     callTime: Ref<{ [key: string]: ITimeData }>
     callMetrics: Ref<{ [key: string]: unknown }>
+    noiseReductionState: Ref<NoiseReductionState>
 }
 
 interface PNExtraHeaders {
