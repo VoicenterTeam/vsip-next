@@ -15,7 +15,7 @@ import { IMessage, MSRPMessage } from 'opensips-js/src/types/msrp'
 import { WebrtcMetricsConfigType } from 'opensips-js/src/types/webrtcmetrics'
 import * as VAD from '@ricky0123/vad-web'
 
-import { NoiseReductionState, VsipAPI } from '@/types'
+import { VsipAPI } from '@/types'
 
 let openSIPSJS: OpenSIPSJS | undefined = undefined
 
@@ -44,10 +44,7 @@ const speakerVolume = ref<number>(1) // [0;1]
 const callStatus = ref<{ [key: string]: ICallStatus }>({})
 const callTime = ref<{ [key: string]: ITimeData }>({})
 const callMetrics = ref<{ [key: string]: unknown }>({})
-const noiseReductionState = ref<NoiseReductionState>({
-    sessionId: null,
-    enabled: false
-})
+const noiseReductionState = ref<boolean>(false)
 
 const activeCalls = computed(() => {
     const calls: { [key: string]: ICall } = {}
@@ -299,8 +296,8 @@ export const vsipAPI: VsipAPI = {
                             .on('changeCallMetrics', (data) => {
                                 callMetrics.value = { ...data }
                             })
-                            .on('changeNoiseReductionState', (data) => {
-                                noiseReductionState.value = { ...data }
+                            .on('changeNoiseReductionState', (state) => {
+                                noiseReductionState.value = state
                             })
                             .begin()
 
