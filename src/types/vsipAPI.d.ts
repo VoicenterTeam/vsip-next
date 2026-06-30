@@ -10,8 +10,16 @@ import {
     CustomLoggerType
 } from 'opensips-js/src/types/rtc'
 import { ITimeData } from 'opensips-js/src/types/timer'
-import { MSRPMessage, IMessage } from 'opensips-js/src/types/msrp'
+import { IMessage } from 'opensips-js/src/types/msrp'
 import { WebrtcMetricsConfigType } from 'opensips-js/src/types/webrtcmetrics'
+
+import {
+    MSRPConversationState,
+    MSRPMemberRole,
+    MSRPUploadResult,
+    MSRPTypingState,
+    UnreadCounts
+} from './msrp'
 
 export interface VsipAPI {
     state: VsipAPIState
@@ -40,7 +48,6 @@ export interface VsipAPIState {
     addCallToCurrentRoom: Ref<boolean>
     callAddingInProgress: Ref<string | undefined>
     activeRooms: Ref<{ [key: number]: IRoom }>
-    msrpHistory: Ref<{ [key: string]: Array<MSRPMessage> }>
     availableMediaDevices: Ref<Array<MediaDeviceInfo>>
     inputMediaDeviceList: Ref<Array<MediaDeviceOption>>
     outputMediaDeviceList: Ref<Array<MediaDeviceOption>>
@@ -59,6 +66,21 @@ export interface VsipAPIState {
     callTime: Ref<{ [key: string]: ITimeData }>
     callMetrics: Ref<{ [key: string]: unknown }>
     noiseReductionState: Ref<boolean>
+    // ---------- MSRP session ----------
+    currentMsrpSession: Ref<IMessage | null>
+    isMSRPInitializing: Ref<boolean>
+    hasActiveMsrpSession: ComputedRef<boolean>
+    // ---------- MSRP conversation state ----------
+    // Metadata and chat history are kept as two parallel maps so that
+    // message activity doesn't invalidate metadata-only consumers.
+    conversations: Ref<{ [conversationKey: string]: MSRPConversationState }>
+    messagesByConversation: Ref<{ [conversationKey: string]: any[] }>
+    currentConversationKey: Ref<string | null>
+    currentConversation: ComputedRef<MSRPConversationState | null>
+    currentMessages: ComputedRef<any[]>
+    sortedConversations: ComputedRef<MSRPConversationState[]>
+    typingByConversation: Ref<{ [conversationKey: string]: MSRPTypingState }>
+    unreadByConversation: Ref<UnreadCounts>
 }
 
 interface PNExtraHeaders {
@@ -91,11 +113,7 @@ export interface VsipAPIActions {
     unholdCall: (callId: string) => void
     answerCall: (callId: string) => void
     moveCall: (callId: string, roomId: number) => Promise<void>
-    msrpAnswer: (callId: string) => void
-    messageTerminate: (callId: string) => void
-    initCall: (target: string, addToCurrentRoom: boolean, holdOtherCalls = false) => void
-    sendMSRP: (msrpSessionId: string, body: string) => void
-    initMSRP: (target: string, body: string, options: object) => void
+    initCall: (target: string, addToCurrentRoom: boolean, holdOtherCalls?: boolean) => void
     setMicrophone: (deviceId: string) => Promise<void>
     setSpeaker: (deviceId: string) => Promise<void>
     sendDTMF: (callId: string, value: string) => void
@@ -104,4 +122,28 @@ export interface VsipAPIActions {
     setSpeakerVolume: (value: number) => void
     setAutoAnswer: (value: boolean) => void
     setMetricsConfig: (config: WebrtcMetricsConfigType) => void
+    // ---------- MSRP ----------
+    initMSRP: (options?: object) => void
+    initMSRPAndSendMessage: (target: string, body: string, options?: object) => void
+    msrpAnswer: (callId: string) => void
+    messageTerminate: (callId: string) => void
+    sendMSRP: (msrpSessionId: string, body: string) => void
+    safeSendMSRP: (body: string) => boolean
+    sendCreateConversationMessage: (targetSip: string | string[]) => boolean
+    sendTextMessage: (conversationKey: string, text: string) => boolean
+    sendMediaMessage: (conversationKey: string, uploadResult: MSRPUploadResult, caption?: string) => boolean
+    sendReaction: (conversationKey: string, targetEventId: string, emoji: string) => boolean
+    sendTypingIndicator: (conversationKey: string, isTyping: boolean) => boolean
+    startTypingKeepAlive: (conversationKey: string) => void
+    stopTypingKeepAlive: (sendStop?: boolean) => void
+    sendReadReceipt: (conversationKey: string) => boolean
+    closeConversation: (conversationKey: string, reason?: string, cause?: string) => boolean
+    changeMemberRole: (conversationKey: string, targetUri: string, newRole: MSRPMemberRole) => boolean
+    acceptInvite: (conversationKey: string) => boolean
+    rejectInvite: (conversationKey: string) => boolean
+    leaveConversation: (conversationKey: string) => boolean
+    setActiveConversation: (conversationKey: string | null) => void
+    requestUploadUrl: (conversationKey: string, filename: string, mimeType: string, fileSize: number) => Promise<MSRPUploadResult>
+    requestFileAccess: (conversationKey: string, eventId: string) => Promise<unknown>
+    uploadFile: (conversationKey: string, file: File, caption?: string) => Promise<MSRPUploadResult>
 }

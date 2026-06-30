@@ -431,9 +431,9 @@
   integrity sha512-ebDJ9b0e702Yr7pWgB0jzm+CX4Srzz8RcXtLJDJB+BSccqMa36uyH/zUsSYao5+BD1ytv3k3rPYCq4mAE1hsXA==
 
 "@types/debug@^4.1.7":
-  version "4.1.12"
-  resolved "https://registry.yarnpkg.com/@types/debug/-/debug-4.1.12.tgz#a155f21690871953410df4b6b6f53187f0500917"
-  integrity sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ==
+  version "4.1.13"
+  resolved "https://registry.yarnpkg.com/@types/debug/-/debug-4.1.13.tgz#22d1cc9d542d3593caea764f974306ab36286ee7"
+  integrity sha512-KSVgmQmzMwPlmtljOomayoR89W4FynCAi3E8PPs7vmDVPe84hT+vGPKkJfThkmXs0x0jAaa9U8uW8bbfyS2fWw==
   dependencies:
     "@types/ms" "*"
 
@@ -1626,9 +1626,9 @@ functions-have-names@^1.2.2, functions-have-names@^1.2.3:
   integrity sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==
 
 generate-unique-id@^2.0.1:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/generate-unique-id/-/generate-unique-id-2.0.3.tgz#8ffe6cc867ea4d098638ffd3f1643e8558562d3f"
-  integrity sha512-oADhkjv6nsiHNJNa+kCe/h6vqgooEPmASHU40hWGbhDODb/xKp5ej7l+7BNs3bQ/v8DCbaVJ42//kN2umQfr6A==
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/generate-unique-id/-/generate-unique-id-2.0.5.tgz#de87d51000c97d63350b9ddea8b3e48c735b8292"
+  integrity sha512-XkV4Q2/7S6VpSZEhGJvKpSEMtVf2xCjrh6zq3tE08V6cN6cvVHyaM1dYZ4hhnn/OuxGAhMX/CvoqELxXAZkh5g==
 
 get-intrinsic@^1.0.2, get-intrinsic@^1.1.1, get-intrinsic@^1.1.3, get-intrinsic@^1.2.0:
   version "1.2.0"
@@ -2305,10 +2305,10 @@ open@^9.1.0:
     is-inside-container "^1.0.0"
     is-wsl "^2.2.0"
 
-opensips-js@^0.1.46:
-  version "0.1.46"
-  resolved "https://registry.yarnpkg.com/opensips-js/-/opensips-js-0.1.46.tgz#c024d9ee1143de19952e3d04884f020b052a1f69"
-  integrity sha512-Y4fJgFozBYRxPceUdmLKZqC5j1blgWxm77/6bSh+QKzwfKJ3rExZu9lu6BEMhwDMiiFLZcntN+LatwQeb63xYQ==
+opensips-js@0.1.47:
+  version "0.1.47"
+  resolved "https://registry.yarnpkg.com/opensips-js/-/opensips-js-0.1.47.tgz#fc6c815518bc6284c357d3b69b2760ac2a41efa4"
+  integrity sha512-QbfxIT8insShJ6SoKCGOLVcA95MwGkjTRwMDxHn4lIID2Uss6s0JkD83gLN7rETYYVux0OR+NqxYHZDJtiB3Qw==
   dependencies:
     "@types/mime" "^3.0.1"
     generate-unique-id "^2.0.1"
