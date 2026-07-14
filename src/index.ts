@@ -29,6 +29,58 @@ export function useVsipInject () {
 export { vsipAPI } from '@/core'
 export type { VsipAPI } from '@/types'
 export type { OpensipsConnectOptions } from '@/types'
-export type * from 'opensips-js/src/types/rtc'
-export type * from 'opensips-js/src/types/timer'
-export type * from 'opensips-js/src/types/listeners'
+
+/* Re-export the public API surface from opensips-js's main entry (not
+ * its internal `src/types/*` subpaths - those files use `@/*` aliases
+ * that misresolve against vsip-next's own `@` alias when rolled up by
+ * api-extractor). Names are listed explicitly so the surface is
+ * intentional rather than "whatever opensips-js happens to export".
+ */
+
+// Runtime constants
+export { MSRP_EVT } from 'opensips-js'
+
+export type {
+    // Call / RTC shapes
+    ICall,
+    IRoom,
+    ICallStatus,
+    IOpenSIPSConfiguration,
+    IOpenSIPSJSOptions,
+    NoiseReductionOptions,
+    NoiseReductionOptionsWithoutVadModule,
+    NoiseReductionMode,
+    CustomLoggerType,
+    // Call-timer payload
+    ITimeData,
+    // Event map + payload helpers. Individual `*Listener` aliases are
+    // intentionally omitted - each is reconstructible on demand as
+    // `OpenSIPSEventMap['<eventName>']`.
+    OpenSIPSEventMap,
+    ListenerCallbackFnType,
+    MSRPMessageEventType,
+    ChangeVolumeEventType,
+    ConnectionStateChangeType,
+    // MSRP session / conversation shapes
+    IMessage,
+    MSRPSessionExtended,
+    TriggerMSRPListenerOptions,
+    ListenerEventType,
+    MSRPMemberRole,
+    MSRPMembership,
+    MSRPMessageStatus,
+    MSRPConversationState,
+    MSRPUploadResult,
+    MSRPConversationRef,
+    MSRPReactionAction,
+    MSRPSendMessageOptions,
+    // WebRTC metrics config
+    WebrtcMetricsConfigType
+} from 'opensips-js'
+
+/* Wrapper-local MSRP shapes (typing decay, presence pulse, unread map). */
+export type {
+    MSRPTypingState,
+    MSRPPresenceState,
+    UnreadCounts
+} from '@/types/msrp'

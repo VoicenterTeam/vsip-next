@@ -1,5 +1,5 @@
 import type { Ref, ComputedRef } from 'vue'
-import {
+import type {
     ICallStatus,
     ICall,
     IRoom,
@@ -7,17 +7,21 @@ import {
     NoiseReductionOptions,
     NoiseReductionOptionsWithoutVadModule,
     NoiseReductionMode,
-    CustomLoggerType
-} from 'opensips-js/src/types/rtc'
-import { ITimeData } from 'opensips-js/src/types/timer'
-import { IMessage } from 'opensips-js/src/types/msrp'
-import { WebrtcMetricsConfigType } from 'opensips-js/src/types/webrtcmetrics'
+    CustomLoggerType,
+    ITimeData,
+    IMessage,
+    WebrtcMetricsConfigType
+} from 'opensips-js'
 
-import {
+import type {
     MSRPConversationState,
     MSRPMemberRole,
     MSRPUploadResult,
+    MSRPConversationRef,
+    MSRPReactionAction,
+    MSRPSendMessageOptions,
     MSRPTypingState,
+    MSRPPresenceState,
     UnreadCounts
 } from './msrp'
 
@@ -71,16 +75,28 @@ export interface VsipAPIState {
     isMSRPInitializing: Ref<boolean>
     hasActiveMsrpSession: ComputedRef<boolean>
     // ---------- MSRP conversation state ----------
-    // Metadata and chat history are kept as two parallel maps so that
-    // message activity doesn't invalidate metadata-only consumers.
-    conversations: Ref<{ [conversationKey: string]: MSRPConversationState }>
-    messagesByConversation: Ref<{ [conversationKey: string]: any[] }>
-    currentConversationKey: Ref<string | null>
+    // Conversations are keyed by their public numeric `conversation_id`
+    // stringified. Metadata and chat history are kept as two parallel maps
+    // so that message activity doesn't invalidate metadata-only consumers.
+    conversations: Ref<{ [conversationId: string]: MSRPConversationState }>
+    messagesByConversation: Ref<{ [conversationId: string]: any[] }>
+    currentConversationId: Ref<string | null>
     currentConversation: ComputedRef<MSRPConversationState | null>
     currentMessages: ComputedRef<any[]>
     sortedConversations: ComputedRef<MSRPConversationState[]>
-    typingByConversation: Ref<{ [conversationKey: string]: MSRPTypingState }>
-    unreadByConversation: Ref<UnreadCounts>
+    typingByConversation: Ref<{ [conversationId: string]: MSRPTypingState }>
+    presenceBySender: Ref<{ [sender: string]: MSRPPresenceState }>
+    /**
+     * Per-conversation unread count derived from
+     * `MSRPConversationState.currentUserLastReadMessageId` + local timeline.
+     * Only conversations with count > 0 appear in the map.
+     */
+    unreadByConversation: ComputedRef<UnreadCounts>
+    /**
+     * event_id of the first unread message per conversation. Consumers use
+     * this to place a "— New messages —" divider inside the open chat.
+     */
+    firstUnreadByConversation: ComputedRef<Record<string, string>>
 }
 
 interface PNExtraHeaders {
@@ -130,20 +146,66 @@ export interface VsipAPIActions {
     sendMSRP: (msrpSessionId: string, body: string) => void
     safeSendMSRP: (body: string) => boolean
     sendCreateConversationMessage: (targetSip: string | string[]) => boolean
-    sendTextMessage: (conversationKey: string, text: string) => boolean
-    sendMediaMessage: (conversationKey: string, uploadResult: MSRPUploadResult, caption?: string) => boolean
-    sendReaction: (conversationKey: string, targetEventId: string, emoji: string) => boolean
-    sendTypingIndicator: (conversationKey: string, isTyping: boolean) => boolean
-    startTypingKeepAlive: (conversationKey: string) => void
-    stopTypingKeepAlive: (sendStop?: boolean) => void
-    sendReadReceipt: (conversationKey: string) => boolean
-    closeConversation: (conversationKey: string, reason?: string, cause?: string) => boolean
-    changeMemberRole: (conversationKey: string, targetUri: string, newRole: MSRPMemberRole) => boolean
-    acceptInvite: (conversationKey: string) => boolean
-    rejectInvite: (conversationKey: string) => boolean
-    leaveConversation: (conversationKey: string) => boolean
-    setActiveConversation: (conversationKey: string | null) => void
-    requestUploadUrl: (conversationKey: string, filename: string, mimeType: string, fileSize: number) => Promise<MSRPUploadResult>
-    requestFileAccess: (conversationKey: string, eventId: string) => Promise<unknown>
-    uploadFile: (conversationKey: string, file: File, caption?: string) => Promise<MSRPUploadResult>
+    sendTextMessage: (
+        conversationRef: MSRPConversationRef,
+        text: string,
+        options?: MSRPSendMessageOptions
+    ) => boolean
+    sendInternalNote: (
+        conversationRef: MSRPConversationRef,
+        text: string,
+        options?: Omit<MSRPSendMessageOptions, 'messageType'>
+    ) => boolean
+    editMessage: (conversationRef: MSRPConversationRef, targetEventId: string, newText: string) => boolean
+    deleteMessage: (conversationRef: MSRPConversationRef, targetEventId: string) => boolean
+    forwardMessage: (
+        sourceMessage: any,
+        targetConversationRef: MSRPConversationRef,
+        forwardedFromLabel?: string
+    ) => boolean
+    sendMediaMessage: (
+        conversationRef: MSRPConversationRef,
+        uploadResult: MSRPUploadResult,
+        caption?: string
+    ) => boolean
+    sendReaction: (
+        conversationRef: MSRPConversationRef,
+        targetEventId: string,
+        emoji: string,
+        action?: MSRPReactionAction
+    ) => boolean
+    removeReaction: (conversationRef: MSRPConversationRef, targetEventId: string, emoji: string) => boolean
+    sendTypingIndicator: (conversationRef: MSRPConversationRef) => boolean
+    startTypingKeepAlive: (conversationRef: MSRPConversationRef) => void
+    stopTypingKeepAlive: () => void
+    /**
+     * Mark the whole conversation as unread (server-side pointer → null).
+     * Optimistically applies the pointer locally so the UI reflects the
+     * change without waiting for a backend echo.
+     */
+    markConversationAsUnread: (conversationRef: MSRPConversationRef) => boolean
+    /**
+     * Mark `targetEventId` and every later message as unread. The pointer
+     * is moved to the message immediately preceding `targetEventId` in the
+     * local timeline; if the target is the very first message the pointer
+     * becomes null (whole conversation unread).
+     */
+    markAsUnreadFromMessage: (
+        conversationRef: MSRPConversationRef,
+        targetEventId: string
+    ) => boolean
+    closeConversation: (conversationRef: MSRPConversationRef, reason?: string, cause?: string) => boolean
+    changeMemberRole: (conversationRef: MSRPConversationRef, targetUri: string, newRole: MSRPMemberRole) => boolean
+    acceptInvite: (conversationRef: MSRPConversationRef) => boolean
+    rejectInvite: (conversationRef: MSRPConversationRef) => boolean
+    leaveConversation: (conversationRef: MSRPConversationRef) => boolean
+    setActiveConversation: (conversationId: string | null) => void
+    requestUploadUrl: (
+        conversationRef: MSRPConversationRef,
+        filename: string,
+        mimeType: string,
+        fileSize: number
+    ) => Promise<MSRPUploadResult>
+    requestFileAccess: (conversationRef: MSRPConversationRef, eventId: string) => Promise<unknown>
+    uploadFile: (conversationRef: MSRPConversationRef, file: File, caption?: string) => Promise<MSRPUploadResult>
 }
