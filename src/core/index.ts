@@ -299,7 +299,7 @@ function clearTypingIndicator (cid: string, sender: string): void {
     typingByConversation.value = next
 }
 
-function rearmTypingIndicator (cid: string, sender: string): void {
+function restartTypingTimeout (cid: string, sender: string): void {
     const key = typingTimerKey(cid, sender)
     const existing = incomingTypingTimers.get(key)
     if (existing) clearTimeout(existing)
@@ -333,10 +333,10 @@ function clearAllTypingTimers (): void {
  * conversations.
  */
 let lastRequestedReadEventIdByConv: Record<string, string> = {}
-const suppressAutoReadForConv = new Set<string>()
+const autoReadExclusions = new Set<string>()
 
 watch(currentConversationId, (_newId, oldId) => {
-    if (oldId) suppressAutoReadForConv.delete(oldId)
+    if (oldId) autoReadExclusions.delete(oldId)
 })
 
 function applyOptimisticPointer (cid: string, pointerValue: string | null): void {
@@ -347,7 +347,7 @@ function applyOptimisticPointer (cid: string, pointerValue: string | null): void
 }
 
 function beginUnreadOverride (cid: string): void {
-    suppressAutoReadForConv.add(cid)
+    autoReadExclusions.add(cid)
     delete lastRequestedReadEventIdByConv[cid]
 }
 
@@ -400,7 +400,7 @@ watch(
     () => {
         const cid = currentConversationId.value
         if (!cid) return null
-        if (suppressAutoReadForConv.has(cid)) return null
+        if (autoReadExclusions.has(cid)) return null
         const conv = conversations.value[cid]
         if (!conv) return null
         const latestEventId = resolveLastEventId(cid)
@@ -764,7 +764,7 @@ export const vsipAPI: VsipAPI = {
                                             updatedAt: Date.now()
                                         }
                                     }
-                                    rearmTypingIndicator(cid, payload.sender)
+                                    restartTypingTimeout(cid, payload.sender)
                                 } else {
                                     clearTypingIndicator(cid, payload.sender)
                                 }

@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { vsipAPI } from './composables'
-import { MODULES } from './types'
-import { MSRP_EVT } from 'opensips-js'
+import { vsipAPI, MSRP_EVT } from '../../src'
 import { exportConversation, hasApiToken, setApiToken } from './api'
 import EmojiPicker from './components/EmojiPicker.vue'
 
@@ -62,12 +60,12 @@ async function handleConnect () {
                 username: u,
                 password: p,
                 domain: d,
-                modules: [ MODULES.MSRP ],
+                modules: [ 'msrp' ],
                 msrpDomain: msrpDomain.value.trim() || undefined,
                 msrpWs: !!msrpDomain.value.trim()
             },
             undefined,
-            { session_timers: false },
+            {},
             console
         )
     } catch (e) {
