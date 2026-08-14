@@ -103,7 +103,7 @@ interface PNExtraHeaders {
     [key: string]: string
 }
 
-export type InitOpensipsConfiguration = Omit<IOpenSIPSConfiguration, 'uri' | 'session_timers' | 'password' | 'noiseReductionOptions'> & {
+export type InitOpensipsConfiguration = Omit<IOpenSIPSConfiguration, 'uri' | 'password' | 'noiseReductionOptions'> & {
     noiseReductionOptions?: NoiseReductionOptionsWithoutVadModule
 }
 

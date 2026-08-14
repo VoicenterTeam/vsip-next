@@ -472,10 +472,10 @@ export const vsipAPI: VsipAPI = {
                 (resolve, reject) => {
                     try {
                         const configuration: IOpenSIPSConfiguration = {
-                            ...opensipsConfiguration,
                             session_timers: false,
                             uri: `sip:${connectOptions.username}@${connectOptions.domain}`,
                             password: connectOptions.password,
+                            ...opensipsConfiguration
                         }
 
                         currentUserUri = `sip:${connectOptions.username}@${connectOptions.domain}`

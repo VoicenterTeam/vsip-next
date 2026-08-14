@@ -65,7 +65,12 @@ async function handleConnect () {
                 msrpWs: !!msrpDomain.value.trim()
             },
             undefined,
-            {},
+            {
+                session_timers: true,
+                session_timers_refresh_method: 'UPDATE',
+                session_timers_force_refresher: true,
+                register_expires: 60
+            },
             console
         )
     } catch (e) {
